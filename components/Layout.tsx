@@ -7,8 +7,9 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+const Layout = ({ children, title = 'Title not given.' }: Props) => (
+  <div id={"content-wrapper"}>
+
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -18,22 +19,16 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <nav>
         <Link href="/">
           <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
+        </Link>
       </nav>
     </header>
-    {children}
+
+    <div id={"page-container"} className={"center"}>
+      {children}
+    </div>
+
     <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>© 2020 sshbot</span>
     </footer>
   </div>
 )
