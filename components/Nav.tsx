@@ -1,4 +1,5 @@
 import styles from "../styles/nav.module.scss";
+import NavItem from "./NavItem";
 
 const Nav = () => (
   <header className={styles.navHeader}>
@@ -6,7 +7,9 @@ const Nav = () => (
           <img src="/imgs/botIcon.png"></img>
           <h1>sshbot</h1>
         </div>
-        <NavItem></NavItem>
+        <NavItem>
+          
+        </NavItem>
   </header>
 );
 

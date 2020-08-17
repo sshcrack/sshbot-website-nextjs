@@ -1,6 +1,8 @@
 const Dotenv = require("dotenv-webpack");
+const withPlugins = require('next-compose-plugins');
+const withImg = require("next-img");
 
-module.exports = {
+const nextConfig = {
     webpack: (config) => {
         // Add the new plugin to the existing webpack plugins
         config.plugins.push(new Dotenv({
@@ -19,3 +21,7 @@ module.exports = {
         return config;
     }
 };
+
+module.exports = withPlugins([
+  withImg
+], nextConfig);
