@@ -8,6 +8,19 @@ body {
   font-family: Alata;
   margin: 0;
   padding: 0;
+
+  background: var(--background-color);
+  color: var(--primary-font-color);
+
+  --background-color: #363a3d;
+  --primary-font-color: rgb(236, 236, 236);
+  --boxShadow: rgb(236, 236, 236);
+  --hoverColor: #4C4F56;
+  --darkBackground: #616161;
+  --borderColor: #696969;
+  --textArea: rgb(236, 236, 236);
+  --darkerBackground: #232729;
+  --roleSelect: #303336;
 }
 
 nav {

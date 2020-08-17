@@ -1,0 +1,24 @@
+
+.botLogo {
+    display: flex;
+    justify-content: space-evenly;
+
+    img {
+        width: 4em;
+        height: 4em;
+        flex: 1;
+    }
+
+    h1 {
+        margin-left: 0.1em;
+    }
+    
+    > * {
+        margin: auto;
+    }
+}
+
+.navHeader {
+    display: flex;
+    justify-content: space-evenly;
+}
