@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
 h1 {
-  font-size: 1em;
+  font-size: 2em;
 }
 
 body {
@@ -12,6 +12,8 @@ body {
   background: var(--background-color);
   color: var(--primary-font-color);
 
+  // ------------------  V A R S ------------------
+
   --background-color: #363a3d;
   --primary-font-color: rgb(236, 236, 236);
   --boxShadow: rgb(236, 236, 236);
@@ -21,6 +23,27 @@ body {
   --textArea: rgb(236, 236, 236);
   --darkerBackground: #232729;
   --roleSelect: #303336;
+  --svgSpeed: 0.2s;
+  --slideSpeed: 0.5s;
+  --dashTransitionSpeed: 0.5s;
+  --buttonHoverBackground: #005e05;
+  --buttonBackground: rgb(0, 128, 6);
+  --alertImportant: #f44336;
+  --alertInfo: #2196F3;
+  --alertWarning: #ff9800;
+  --alertSuccess: #4CAF50;
+  --musicPrimary: #8f007d;
+  --musicSecondary: #5F185A;
+  --musicFont: #b2019a;
+  --economyPrimary: #f5c800;
+  --economySecondary: #1C6B6C;
+  --logoutPrimary: #A10000;
+  --logoutSecondary: #B4B5B6;
+  --moderationPrimary: #e67f02;
+  --moderationSecondary: #625120;
+  --dashboardPrimary: #007ef5;
+  --dashboardSecondary: #1C4F82;
+  --sshbotFont: #B51E00;
 }
 
 nav {

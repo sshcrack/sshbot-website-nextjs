@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const withImg = require("next-img");
 
 const nextConfig = {
+    generateEtags: true,
     webpack: (config) => {
         // Add the new plugin to the existing webpack plugins
         config.plugins.push(new Dotenv({

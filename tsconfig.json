@@ -22,10 +22,10 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "next-auth": ["assets/next-auth-Types"],
-      "next-auth/client": ["assets/next-auth-Types/client"],
-      "next-auth/providers": ["assets/next-auth-Types/providers"],
-      "next-auth/adapters": ["assets/next-auth-Types/adapters"]
+      "next-auth": ["interfaces/next-auth-Types"],
+      "next-auth/client": ["interfaces/next-auth-Types/client"],
+      "next-auth/providers": ["interfaces/next-auth-Types/providers"],
+      "next-auth/adapters": ["interfaces/next-auth-Types/adapters"]
     }
   },
   "exclude": [
@@ -34,6 +34,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "pages/_app.tx"
+    "pages/_app.tx",
+    "interfaces/custom.d.ts"
   ]
 }

@@ -16,8 +16,9 @@ let dbOptions : ConnectionOptions = {
     username: username,
     password: password,
     database: database,
-    
+    synchronize: true
 }
+
 
 const options: InitOptions = {
     // Configure one or more authentication providers

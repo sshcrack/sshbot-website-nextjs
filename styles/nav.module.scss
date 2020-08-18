@@ -2,6 +2,7 @@
 .botLogo {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 
     img {
         width: 4em;
@@ -12,13 +13,49 @@
     h1 {
         margin-left: 0.1em;
     }
-    
-    > * {
-        margin: auto;
-    }
 }
 
 .navHeader {
     display: flex;
     justify-content: space-evenly;
+}
+
+.navUl {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+
+    li {
+        flex: 1;
+    }
+}
+
+.singleText {
+    margin-left: 0.5em;
+}
+
+.moderation:hover {
+    --fa-primary-color: var(--moderationPrimary);
+    --fa-secondary-color: var(--moderationSecondary);
+}
+
+.music:hover {
+    --fa-primary-color: var(--musicPrimary);
+    --fa-secondary-color: var(--musicSecondary);
+}
+
+.economy:hover {
+    --fa-primary-color: var(--economyPrimary);
+    --fa-secondary-color: var(--economySecondary);
+}
+
+.logout:hover {
+    --fa-primary-color: var(--logoutPrimary);
+    --fa-secondary-color: var(--logoutSecondary);
+}
+
+.dashboard:hover {
+    --fa-primary-color: var(--dashboardPrimary);
+    --fa-secondary-color: var(--dashboardSecondary);
+    --fa-secondary-opacity: 1;
 }

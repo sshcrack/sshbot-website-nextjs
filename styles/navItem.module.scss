@@ -1,0 +1,46 @@
+.svg {
+    path {
+        transition: background-color var(--dashTransitionSpeed) ease-in-out,
+        color var(--dashTransitionSpeed) ease-in-out,
+        font-size ease-in var(--svgSpeed),
+        fill ease-in var(--svgSpeed);
+    }
+
+    font-size: 2em;
+
+    transition: background-color var(--dashTransitionSpeed) ease-in-out,
+                color var(--dashTransitionSpeed) ease-in-out,
+                font-size ease-in var(--svgSpeed),
+                fill ease-in var(--svgSpeed);
+}
+
+.svg path:nth-child(1) {
+    fill: var(--fa-secondary-color, currentColor);
+    opacity: var(--fa-secondary-opacity, .4)
+}
+
+.svg path:nth-child(2) {
+    fill: var(--fa-primary-color, currentColor);
+    opacity: var(--fa-primary-opacity, 1)
+}
+
+.navItem {
+    color: #8f8f8f;
+
+    display: flex;
+    transition: ease-in-out;
+
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        --fa-secondary-opacity: 1;
+
+        svg {
+            font-size: 3.5em;
+        }
+    }
+
+    --fa-secondary-opacity: .5;
+
+}
