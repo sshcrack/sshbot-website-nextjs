@@ -15,7 +15,8 @@ let dbOptions : ConnectionOptions = {
     host: host,
     username: username,
     password: password,
-    database: database
+    database: database,
+    
 }
 
 const options: InitOptions = {

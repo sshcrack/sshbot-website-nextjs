@@ -1,5 +1,6 @@
-import styles from "../styles/nav.module.scss";
-import NavItem from "./NavItem";
+import styles from "../styles/nav.module.scss"
+import NavItem from "./NavItem"
+import { signIn } from "next-auth/client"
 
 const Nav = () => (
   <header className={styles.navHeader}>
@@ -10,6 +11,8 @@ const Nav = () => (
         <NavItem>
           
         </NavItem>
+        
+        <button onClick={signIn}>Sign in</button>
   </header>
 );
 
