@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import Nav from "./Nav";
 //import Link from 'next/link'
 import Head from 'next/head'
+import SingleText from './SingleText';
 
 type Props = {
   children?: ReactNode
