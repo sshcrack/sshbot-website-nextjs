@@ -1,17 +1,7 @@
 .svg {
-    path {
-        transition: background-color var(--dashTransitionSpeed) ease-in-out,
-        color var(--dashTransitionSpeed) ease-in-out,
-        font-size ease-in var(--svgSpeed),
-        fill ease-in var(--svgSpeed);
-    }
+    width: 2.5em;
 
-    font-size: 2em;
-
-    transition: background-color var(--dashTransitionSpeed) ease-in-out,
-                color var(--dashTransitionSpeed) ease-in-out,
-                font-size ease-in var(--svgSpeed),
-                fill ease-in var(--svgSpeed);
+    transition: all ease-in var(--svgSpeed);
 }
 
 .svg path:nth-child(1) {
@@ -25,7 +15,7 @@
 }
 
 .navItem {
-    color: #8f8f8f;
+    color: var(--notActive);
 
     display: flex;
     transition: ease-in-out;
@@ -37,7 +27,7 @@
         --fa-secondary-opacity: 1;
 
         svg {
-            font-size: 3.5em;
+            width: 3.5em;
         }
     }
 

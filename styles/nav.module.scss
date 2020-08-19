@@ -39,6 +39,11 @@
     --fa-secondary-color: var(--moderationSecondary);
 }
 
+.moderationAnim {
+    color: var(--moderationPrimary);
+    font-size: 3em;
+}
+
 .music:hover {
     --fa-primary-color: var(--musicPrimary);
     --fa-secondary-color: var(--musicSecondary);

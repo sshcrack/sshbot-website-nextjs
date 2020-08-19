@@ -1,9 +1,11 @@
 import styles from "../styles/nav.module.scss"
 import NavItem from "./NavItem"
 import gavel from "../assets/svg/gavel.svg";
+import anime from "animejs"
 import { signIn, signOut, useSession, Session } from "next-auth/client"
 import SingleText from "./SingleText";
 import Link from "next/link";
+import { MouseEvent, CSSProperties } from "react";
 
 const Nav = () => {
   const [session, loading] = useSession();
@@ -18,8 +20,8 @@ const Nav = () => {
         <li>
           <Link href="/moderation">
             <a>
-              <NavItem svg={gavel} hoverClass={styles.moderation}>
-                <SingleText text="Moderation" type="span" className={styles.singleText}/>
+              <NavItem svg={gavel} hoverClass={styles.moderation} onMouseEnter={handleMouseEnter}>
+                <SingleText text="Moderation" type="span" animClass={styles.moderationAnim} className={styles.singleText} />
               </NavItem>
             </a>
           </Link>
@@ -57,4 +59,100 @@ function toHome() {
 
 function isNull(obj: any) {
   return obj === undefined || obj === null;
+}
+
+interface animateProp {
+  [key: string]: string
+}
+
+function getAnimation(element: Element, toAnimate: animateProp) {
+  return anime({
+    targets: element.children,
+    direction: 'alternate',
+    delay: function (el, i, l) {
+      return i * 50
+    },
+    loop: false,
+    easing: 'easeInOutExpo',
+    ...toAnimate
+  })
+}
+
+function handleMouseEnter(event: MouseEvent<HTMLDivElement>) {
+  let singleText = event.currentTarget.querySelector(`.${styles.singleText}`);
+  if (singleText === null) return;
+
+  let animClassName = singleText.getAttribute("data-animclass")
+  if (animClassName === null) return;
+
+  let rules = getStyle(`.${animClassName}`, singleText);
+
+  console.log("Rules", rules);
+  
+
+  if (rules === undefined) return
+
+
+  let animation = getAnimation(singleText, rules);
+
+  animation?.play();
+}
+
+interface customStyle extends CSSProperties {
+  [key: number]: string,
+  [key: string]: any,
+  length: number
+}
+
+function getStyle(selector: string, element ?: Element): { [key: string]: string } | undefined {
+  let stylesheets = document.styleSheets;
+  let style: customStyle | undefined = undefined;
+
+  for (let i = 0; i < stylesheets.length; i++) {
+    let stylesheet = stylesheets.item(i);
+
+    if (stylesheet === null) continue;
+
+    for (let i = 0; i < stylesheet.cssRules.length; i++) {
+      
+      let rule: any = stylesheet.cssRules.item(i);
+      if (selector === rule.selectorText) {
+        style = rule.style;
+      }
+    }
+  }
+
+  
+  if (style === undefined) return;
+
+  let rules: { [key: string]: string } = {};
+
+  for (let i = 0; i < style.length; i++) {
+    let ruleName: string = style[i];
+    let anyValue = style[ruleName];
+    let value = ("" + anyValue).split(" ").join("")
+    console.log(value);
+    
+
+    if (value.startsWith("var(") && value.endsWith(")")) {
+      value = value.replace("var(", "").replace(")", "");
+
+      console.log("Getting name", value);
+
+      console.log("Element is", element);
+
+      value = getCSSVar(value, element);
+    }
+
+    value = value.split(" ").join("");
+
+    rules[ruleName] = value;
+  }
+
+  return rules;
+}
+
+function getCSSVar(Var: string, style: Element = document.body) {
+  return getComputedStyle(style)
+    .getPropertyValue(Var);
 }

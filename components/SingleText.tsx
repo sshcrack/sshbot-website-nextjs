@@ -4,22 +4,25 @@ type ReactElement = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElem
 interface Props {
     type: keyof ReactHTML,
     className: string,
-    text: string
+    text: string,
+    animClass: string
 }
 
 
-const SingleText = ({ type, text, className }: Props) => {
+const SingleText = ({ type, text, className, animClass }: Props) => {
     
     let elements: ReactElement[] = [];
 
-    let div = React.createElement("div", {className: className}, elements);
+    let index = 0;
 
     text.split("").forEach(character => {
-        let reactElement: ReactElement = React.createElement(type, {}, character);
-        
+        let reactElement: ReactElement = React.createElement(type, {key: index}, character);
         
         elements.push(reactElement);
+        index++;
     });
+
+    let div = React.createElement("div", {className: className, "data-animclass": animClass}, elements);
     return (div);
 }
 
