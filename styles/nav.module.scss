@@ -30,14 +30,11 @@
     }
 }
 
-.moderation:hover {
-    --fa-primary-color: var(--moderationPrimary);
-    --fa-secondary-color: var(--moderationSecondary);
-}
-
-.moderationAnim {
-    color: var(--moderationPrimary);
-    font-size: 2em;
+.moderation {
+    &:hover {
+        --fa-primary-color: var(--moderationPrimary);
+        --fa-secondary-color: var(--moderationSecondary);
+    }
 }
 
 .music:hover {

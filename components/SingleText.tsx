@@ -1,33 +1,74 @@
-import React, { ReactHTML } from "react";
+import React, { Component, DetailedReactHTMLElement, HTMLAttributes, ReactHTML, RefObject } from 'react';
 import styles from "../styles/singleText.module.scss";
-type ReactElement = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+import { getStyle, getAnimation } from 'utils/tools';
 
 interface Props {
-    type: keyof ReactHTML,
-    className: string,
-    text: string,
-    animClass: string
+  text: string,
+  animClass: string,
+  type ?: keyof ReactHTML
 }
 
+type ReactType = DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>
 
-const SingleText = ({ type, text, className, animClass }: Props) => {
+export class SingleText extends Component<Props> {
+  private text: string;
+  private type: keyof ReactHTML;
+  private animClass: string;
+  private mainRef: RefObject<HTMLDivElement>;
+  private mainDiv: HTMLDivElement;
+  private normalClass = styles.normalClass;
+
+  constructor(props: Props) {
+    super(props)
+
+    this.mainRef = React.createRef<HTMLDivElement>();
+
+    this.type = props.type === undefined ? "span" : props.type;
+    this.text = props.text;
+    this.animClass = props.animClass;
+  }
+
+  componentDidMount() {
+    if(this.mainRef.current === null) return;
+
+    this.mainDiv = this.mainRef.current;
+  }
+
+  render() {
+    let characters = this.text.split("");
+
+    let divs: ReactType[] = [];
+
+    divs = characters.map((character, index) => {
+      let element = React.createElement(this.type, { key: index }, character);
+
+      return element;
+    })
+
+    return (
+      <div className={styles.rootDiv}>
+        <div className={styles.singleText} ref={this.mainRef}>
+          {divs}
+        </div>
+      </div>
+    )
+  }
+
+  public animateIn() {
+    console.log("AnimIn", this.animClass);
     
-    let elements: ReactElement[] = [];
-
-    let index = 0;
-
-    text.split("").forEach(character => {
-        let reactElement: ReactElement = React.createElement(type, {key: index}, character);
-        
-        elements.push(reactElement);
-        index++;
-    });
-
-    let splitTextDiv = React.createElement("div", {className: className, "data-animclass": animClass, "data-normalclass": styles.normalClass}, elements);
+    let rules = getStyle(`.${this.animClass}`, this.mainDiv);
+    if(rules === undefined) return;
     
-    let div = React.createElement("div", {className: styles.rootDiv}, splitTextDiv);
+    let animation = getAnimation(this.mainDiv, rules);
+    animation.play();
+  }
 
-    return (div);
+  public animateOut() {
+    let rules = getStyle(`.${this.normalClass}`, this.mainDiv);
+    if(rules === undefined) return;
+    
+    let animation = getAnimation(this.mainDiv, rules);
+    animation.play();
+  }
 }
-
-export default SingleText;
