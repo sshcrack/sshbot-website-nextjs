@@ -1,4 +1,5 @@
-import React, { ReactNode, ReactHTML } from "react";
+import React, { ReactHTML } from "react";
+import styles from "../styles/singleText.module.scss";
 type ReactElement = React.DetailedReactHTMLElement<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
 interface Props {
@@ -22,7 +23,10 @@ const SingleText = ({ type, text, className, animClass }: Props) => {
         index++;
     });
 
-    let div = React.createElement("div", {className: className, "data-animclass": animClass}, elements);
+    let splitTextDiv = React.createElement("div", {className: className, "data-animclass": animClass, "data-normalclass": styles.normalClass}, elements);
+    
+    let div = React.createElement("div", {className: styles.rootDiv}, splitTextDiv);
+
     return (div);
 }
 

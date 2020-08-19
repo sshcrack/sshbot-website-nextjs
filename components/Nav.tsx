@@ -20,7 +20,7 @@ const Nav = () => {
         <li>
           <Link href="/moderation">
             <a>
-              <NavItem svg={gavel} hoverClass={styles.moderation} onMouseEnter={handleMouseEnter}>
+              <NavItem svg={gavel} hoverClass={styles.moderation} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <SingleText text="Moderation" type="span" animClass={styles.moderationAnim} className={styles.singleText} />
               </NavItem>
             </a>
@@ -69,9 +69,10 @@ function getAnimation(element: Element, toAnimate: animateProp) {
   return anime({
     targets: element.children,
     direction: 'alternate',
-    delay: function (el, i, l) {
-      return i * 50
+    delay: function (_el, i, _l) {
+      return i * 25
     },
+    duration: 500,
     loop: false,
     easing: 'easeInOutExpo',
     ...toAnimate
@@ -79,13 +80,37 @@ function getAnimation(element: Element, toAnimate: animateProp) {
 }
 
 function handleMouseEnter(event: MouseEvent<HTMLDivElement>) {
-  let singleText = event.currentTarget.querySelector(`.${styles.singleText}`);
+  let singleText = event.currentTarget.querySelector(`div div`);
+  console.log("SingleText", singleText);
   if (singleText === null) return;
 
   let animClassName = singleText.getAttribute("data-animclass")
   if (animClassName === null) return;
 
+  console.log("Continue 2");
+  
+
   let rules = getStyle(`.${animClassName}`, singleText);
+
+  console.log("Rules", rules);
+  
+
+  if (rules === undefined) return
+
+
+  let animation = getAnimation(singleText, rules);
+
+  animation?.play();
+}
+
+function handleMouseLeave(event: MouseEvent<HTMLDivElement>) {
+  let singleText = event.currentTarget.querySelector(`div div`);
+  if (singleText === null) return;
+
+  let normalClass = singleText.getAttribute("data-normalclass")
+  if (normalClass === null) return;
+
+  let rules = getStyle(`.${normalClass}`, singleText);
 
   console.log("Rules", rules);
   

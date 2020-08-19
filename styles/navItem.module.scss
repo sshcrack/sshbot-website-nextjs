@@ -23,6 +23,11 @@
     align-items: center;
     justify-content: center;
 
+    .singleText {
+        font-size: 0em;
+        color: var(--background-color)
+    }
+
     &:hover {
         --fa-secondary-opacity: 1;
 

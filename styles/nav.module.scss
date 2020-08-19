@@ -30,10 +30,6 @@
     }
 }
 
-.singleText {
-    margin-left: 0.5em;
-}
-
 .moderation:hover {
     --fa-primary-color: var(--moderationPrimary);
     --fa-secondary-color: var(--moderationSecondary);
@@ -41,7 +37,7 @@
 
 .moderationAnim {
     color: var(--moderationPrimary);
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .music:hover {

@@ -1,0 +1,26 @@
+.rootDiv {
+    display: grid;
+    align-items: center;
+
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+
+    & > * {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    &::before {
+        opacity: 0%;
+        content: "Moderation";
+    }
+}
+
+.normalClass {
+    color: var(--notActive);
+    font-size: 0em;
+}
+
+.singleText {
+    margin-left: 0.5em;
+}

@@ -1,8 +1,7 @@
-import React, { ReactNode } from 'react'
-import Nav from "./Nav";
 //import Link from 'next/link'
-import Head from 'next/head'
-import SingleText from './SingleText';
+import Head from 'next/head';
+import React, { ReactNode } from 'react';
+import Nav from "./Nav";
 
 type Props = {
   children?: ReactNode
