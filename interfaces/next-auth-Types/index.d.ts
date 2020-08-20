@@ -1,8 +1,8 @@
 // Minimum TypeScript Version: 3.8
 /// <reference types="node" />
-import type { ConnectionOptions } from 'typeorm';
-import type { IncomingMessage, ServerResponse } from 'http';
-import type { PossibleProviders } from './providers';
+import { ConnectionOptions } from 'typeorm';
+import { IncomingMessage, ServerResponse } from 'http';
+import { PossibleProviders } from './providers';
 import Adapter from './adapters';
 
 interface InitOptions {
@@ -71,7 +71,7 @@ interface Callbacks {
 declare function NextAuth(req: NextApiRequest, res: NextApiResponse, options?: InitOptions): Promise<void>;
 
 export default NextAuth;
-export type { InitOptions, PageOptions };
+export { InitOptions, PageOptions };
 
 /**
  * TODO: `dtslint` throws when parsing Next types... the following types are copied directly from `next/types` ...

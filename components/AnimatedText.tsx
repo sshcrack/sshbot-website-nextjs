@@ -1,5 +1,5 @@
 import React, { Component, DetailedReactHTMLElement, HTMLAttributes, ReactHTML, RefObject } from 'react';
-import styles from "../styles/singleText.module.scss";
+import styles from "../styles/animatedText.module.scss";
 import { getStyle, getAnimation } from 'utils/tools';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 type ReactType = DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>
 
-export class SingleText extends Component<Props> {
+export class AnimatedText extends Component<Props> {
   private text: string;
   private type: keyof ReactHTML;
   private animClass: string;
@@ -55,11 +55,9 @@ export class SingleText extends Component<Props> {
   }
 
   public animateIn() {
-    console.log("AnimIn", this.animClass);
-    
     let rules = getStyle(`.${this.animClass}`, this.mainDiv);
     if(rules === undefined) return;
-    
+
     let animation = getAnimation(this.mainDiv, rules);
     animation.play();
   }

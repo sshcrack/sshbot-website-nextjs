@@ -35,7 +35,7 @@ type PossibleProviders =
 
 declare const Providers: Providers;
 export default Providers;
-export type { PossibleProviders };
+export { PossibleProviders };
 
 /**
  * Email

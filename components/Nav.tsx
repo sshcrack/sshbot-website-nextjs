@@ -1,28 +1,48 @@
-import { Session, signIn, signOut, useSession } from "next-auth/client";
-import Link from "next/link";
+import { session, signIn, signOut, useSession } from "next-auth/client";
 import gavel from "../assets/svg/gavel.svg";
+import music from "../assets/svg/music.svg";
+import economy from "../assets/svg/sack-dollar.svg";
 import styles from "../styles/nav.module.scss";
 import NavItem from "./NavItem";
+import Link from 'next/link';
 
 const Nav = () => {
   const [session, loading] = useSession();
   return (
     <header className={styles.navHeader}>
-      <div className={styles.botLogo} onClick={toHome}>
-        <img src="/imgs/botIcon.png"></img>
-        <h1>sshbot</h1>
-      </div>
+      <Link href="/">
+        <a>
+          <div className={styles.botLogo}>
+            <img src="/imgs/botIcon.png"></img>
+            <h1>sshbot</h1>
+          </div>
+        </a>
+      </Link>
 
       <ul className={styles.navUl}>
         <li>
-          <Link href="/moderation">
-            <a>
-              <NavItem
-                svg={gavel}
-                hoverClass={styles.moderation}
-              />
-            </a>
-          </Link>
+          <NavItem
+            svg={music}
+            hoverClass={styles.music}
+            text="Music"
+            href="/music"
+          />
+        </li>
+        <li>
+          <NavItem
+            svg={economy}
+            hoverClass={styles.economy}
+            text="Economy"
+            href="/economy"
+          />
+        </li>
+        <li>
+          <NavItem
+            svg={gavel}
+            hoverClass={styles.moderation}
+            text="Moderation"
+            href="/moderation"
+          />
         </li>
       </ul>
 
@@ -32,7 +52,7 @@ const Nav = () => {
 };
 
 interface SignInOutProps {
-  session: Session;
+  session: session;
   loading: boolean;
 }
 
@@ -65,10 +85,6 @@ function SignInOut(props: SignInOutProps) {
 }
 
 export default Nav;
-
-function toHome() {
-  window.location.href = "/";
-}
 
 function isNull(obj: any) {
   return obj === undefined || obj === null;

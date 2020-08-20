@@ -1,17 +1,37 @@
 .svg {
-    width: 2.5em;
+    display: grid;
+    justify-items: center;
+    align-items: center;
 
-    transition: all ease-in var(--svgSpeed);
-}
+    svg {
+        width: var(--svgNavSize);
 
-.svg path:nth-child(1) {
-    fill: var(--fa-secondary-color, currentColor);
-    opacity: var(--fa-secondary-opacity, .4)
-}
+        transition: all ease-in var(--svgSpeed);
 
-.svg path:nth-child(2) {
-    fill: var(--fa-primary-color, currentColor);
-    opacity: var(--fa-primary-opacity, 1)
+        path:nth-child(1) {
+            fill: var(--fa-secondary-color, currentColor);
+            opacity: var(--fa-secondary-opacity, 0.4);
+        }
+
+        path:nth-child(2) {
+            fill: var(--fa-primary-color, currentColor);
+            opacity: var(--fa-primary-opacity, 1);
+        }
+
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    &::before {
+        width: var(--svgNavHoverSize);
+        height: var(--svgNavHoverSize);
+        content: " ";
+
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    display: grid;
 }
 
 .navItem {
@@ -25,22 +45,16 @@
 
     .singleText {
         font-size: 0em;
-        color: var(--background-color)
+        color: var(--background-color);
     }
 
     &:hover {
         --fa-secondary-opacity: 1;
 
         svg {
-            width: 3.5em;
+            width: var(--svgNavHoverSize);
         }
     }
 
-    --fa-secondary-opacity: .5;
-
-}
-
-.moderationAnim {
-    color: var(--moderationPrimary);
-    font-size: 2em;
+    --fa-secondary-opacity: 0.5;
 }

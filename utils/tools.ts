@@ -8,7 +8,11 @@ interface customStyle extends CSSProperties {
 }
 
 export function getCSSVar(Var: string, style: Element = document.body) {
-  return getComputedStyle(style).getPropertyValue(Var);
+  return getComputedStyle(style).getPropertyValue(Var).split(" ").join("");
+}
+
+interface customStylesheet extends StyleSheet {
+  [key: string]: any
 }
 
 export function getStyle(
@@ -19,7 +23,10 @@ export function getStyle(
   let style: customStyle | undefined = undefined;
 
   for (let i = 0; i < stylesheets.length; i++) {
-    let stylesheet = stylesheets.item(i);
+    let item = stylesheets.item(i);
+    if(item === null) continue;
+
+    let stylesheet: customStylesheet = item;
 
     if (stylesheet === null) continue;
 
@@ -39,14 +46,9 @@ export function getStyle(
     let ruleName: string = style[i];
     let anyValue = style[ruleName];
     let value = ("" + anyValue).split(" ").join("");
-    console.log(value);
 
     if (value.startsWith("var(") && value.endsWith(")")) {
       value = value.replace("var(", "").replace(")", "");
-
-      console.log("Getting name", value);
-
-      console.log("Element is", element);
 
       value = getCSSVar(value, element);
     }
@@ -70,7 +72,7 @@ export function getAnimation(element: Element, toAnimate: animateProp) {
     delay: function (_el, i, _l) {
       return i * 25;
     },
-    duration: 500,
+    duration: 250,
     loop: false,
     easing: "easeInOutExpo",
     ...toAnimate,

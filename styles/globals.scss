@@ -14,6 +14,11 @@ body {
 
   // ------------------  V A R S ------------------
 
+  --svgNavSize: 2.5em;
+  --svgNavHoverSize: 3.5em;
+
+
+
   --background-color: #363a3d;
   --primary-font-color: rgb(236, 236, 236);
   --notActive: #8f8f8f;
@@ -26,6 +31,8 @@ body {
   --roleSelect: #303336;
   --svgSpeed: 0.2s;
   --slideSpeed: 0.5s;
+
+
   --dashTransitionSpeed: 0.5s;
   --buttonHoverBackground: #005e05;
   --buttonBackground: rgb(0, 128, 6);

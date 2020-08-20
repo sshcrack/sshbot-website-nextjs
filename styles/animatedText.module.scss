@@ -12,6 +12,10 @@
 
     &::before {
         opacity: 0%;
+        grid-column: 1;
+        grid-row: 1;
+        font-size: 2em;
+        margin-left: 0.5em;
         content: "Moderation";
     }
 }
@@ -21,7 +25,10 @@
     font-size: 0em;
 }
 
-.singleText {
+.singleText{
     margin-left: 0.5em;
-    font-size: 0em;
+
+    span {
+        font-size: 0em;
+    }
 }
