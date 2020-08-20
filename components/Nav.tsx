@@ -1,17 +1,18 @@
-import { session, signIn, signOut, useSession } from "next-auth/client";
+import { session, signIn, signOut, useSession, providers } from "next-auth/client";
 import gavel from "../assets/svg/gavel.svg";
 import music from "../assets/svg/music.svg";
 import economy from "../assets/svg/sack-dollar.svg";
 import styles from "../styles/nav.module.scss";
 import NavItem from "./NavItem";
 import Link from 'next/link';
+import { isNull } from 'utils/tools';
 
 const Nav = () => {
   const [session, loading] = useSession();
   return (
     <header className={styles.navHeader}>
-      <Link href="/">
-        <a>
+      <Link href="/" >
+        <a className={styles.linkBotLogo}>
           <div className={styles.botLogo}>
             <img src="/imgs/botIcon.png"></img>
             <h1>sshbot</h1>
@@ -44,35 +45,42 @@ const Nav = () => {
             href="/moderation"
           />
         </li>
+        <li>
+          <CheckLoggedIn session={session} />
+        </li>
       </ul>
-
-      <SignInOut session={session} loading={loading}></SignInOut>
     </header>
   );
 };
 
 interface SignInOutProps {
   session: session;
-  loading: boolean;
 }
 
-function SignInButton(_props: {}) {
+function CheckLoggedIn(props: SignInOutProps) {
+  return isNull(props.session) ? <SignInMenu /> : <SignOutMenu />;
+}
+
+function SignInMenu(_props: {}) {
   return (
-    <button
-      onClick={() => {
-        signIn();
-      }}
-    >
-      Sign in
-    </button>
+    <NavItem
+    svg={gavel}
+    hoverClass={styles.moderation}
+    text="Moderation"
+    onClick={() => {
+      signIn("discord");
+    }}
+    />
   );
 }
 
-function SignOutButton(_props: {}) {
+function SignOutMenu(_props: {}) {
   return (
     <button
       onClick={() => {
-        signOut();
+        signOut({
+          callbackUrl: "http://localhost:3000/loggedOut"
+        });
       }}
     >
       Sign out
@@ -80,12 +88,4 @@ function SignOutButton(_props: {}) {
   );
 }
 
-function SignInOut(props: SignInOutProps) {
-  return isNull(props.session) ? <SignInButton /> : <SignOutButton />;
-}
-
 export default Nav;
-
-function isNull(obj: any) {
-  return obj === undefined || obj === null;
-}

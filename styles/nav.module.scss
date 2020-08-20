@@ -20,9 +20,14 @@
     }
 }
 
+.linkBotLogo {
+    margin-left: 2em;
+}
+
 .navHeader {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .navUl {
@@ -45,7 +50,7 @@
 
     &::before {
         color: var(--moderationPrimary);
-        font-size: 2em;
+        font-size: 2rem;
     }
 }
 
@@ -57,7 +62,7 @@
 
     &::before {
         color: var(--musicPrimary);
-        font-size: 2em;
+        font-size: 2rem;
     }
 }
 
@@ -69,11 +74,8 @@
 
     &::before {
         color: var(--economyPrimary);
-        font-size: 2em;
+        font-size: 2rem;
     }
-}
-
-.economy:hover {
 }
 
 .logout:hover {

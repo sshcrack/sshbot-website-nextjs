@@ -1,0 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Khula:700);
+
+.consoleText {
+    display: grid;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+        grid-column: 1;
+        grid-row: 1;
+    }
+}
+
+.consoleInput {
+    display: flex;
+}
+
+.underscore {
+    display: grid;
+
+    & > * {
+        grid-column: 1;
+        grid-row: 1;
+    }
+}
+
+.underscoreInvisible {
+    opacity: 0%;
+}

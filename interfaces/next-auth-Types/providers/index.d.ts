@@ -31,7 +31,8 @@ type PossibleProviders =
   | Discord
   | Twitch
   | Mixer
-  | Okta;
+  | Okta
+  | DiscordCustom;
 
 declare const Providers: Providers;
 export default Providers;

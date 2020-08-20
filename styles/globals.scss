@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
 h1 {
-  font-size: 2em;
+  font-size: 3rem;
 }
 
 body {
@@ -54,6 +54,18 @@ body {
   --sshbotFont: #B51E00;
 }
 
+.hidden {
+  display: none;
+}
+
+.noOpacity {
+  opacity: 0;
+}
+
+button {
+  border: none
+}
+
 nav {
   display: flex;
   justify-content: space-evenly;
@@ -76,10 +88,14 @@ footer {
 
 #page-container {
   padding-bottom: 2.5rem;    /* Footer height */
+  flex: 1;
 }
 
 #content-wrapper {
   min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 footer {

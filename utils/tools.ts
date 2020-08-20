@@ -78,3 +78,7 @@ export function getAnimation(element: Element, toAnimate: animateProp) {
     ...toAnimate,
   });
 }
+
+export function isNull(obj: any) {
+  return obj === undefined || obj === null;
+}

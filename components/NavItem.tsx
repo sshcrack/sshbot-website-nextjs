@@ -10,7 +10,8 @@ type Props = {
   hoverClass: string;
   svg: svgType;
   text: string;
-  href: string;
+  href ?: string;
+  onClick ?: ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void)
 };
 
 export default class NavItem extends Component<Props> {
@@ -20,14 +21,16 @@ export default class NavItem extends Component<Props> {
   private href: string;
   private singleTextRef: RefObject<AnimatedText>;
   private singleText: AnimatedText;
+  private onClick: ((event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void) | undefined;
 
   constructor(props: Props) {
     super(props);
 
     this.customSVG = props.svg;
     this.text = props.text;
-    this.href = props.href;
+    this.href = props.href === undefined ? "#" : props.href;
     this.hoverClass = props.hoverClass;
+    this.onClick = props.onClick;
     this.singleTextRef = React.createRef<AnimatedText>();
   }
 
@@ -39,7 +42,7 @@ export default class NavItem extends Component<Props> {
   render() {
     return (
       <Link href={this.href}>
-        <a>
+        <a onClick={this.onClick}>
           <div
             className={styles.navItem + " " + this.hoverClass}
             onMouseEnter={() => { this.singleText.animateIn() }}

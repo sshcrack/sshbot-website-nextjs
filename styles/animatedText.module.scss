@@ -10,25 +10,25 @@
         grid-row: 1;
     }
 
-    &::before {
+    /*&::before {            //! Uncomment to fix nav items
         opacity: 0%;
         grid-column: 1;
         grid-row: 1;
-        font-size: 2em;
+        font-size: 2rem;
         margin-left: 0.5em;
         content: "Moderation";
-    }
+    }*/
 }
 
 .normalClass {
     color: var(--notActive);
-    font-size: 0em;
+    font-size: 0rem;
 }
 
 .singleText{
     margin-left: 0.5em;
 
     span {
-        font-size: 0em;
+        font-size: 0rem;
     }
 }
