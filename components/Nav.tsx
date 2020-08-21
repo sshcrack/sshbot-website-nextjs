@@ -1,4 +1,4 @@
-import { session, signIn, signOut, useSession, providers } from "next-auth/client";
+import { session, signIn, signOut, useSession } from "next-auth/client";
 import gavel from "../assets/svg/gavel.svg";
 import music from "../assets/svg/music.svg";
 import economy from "../assets/svg/sack-dollar.svg";
@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { isNull } from 'utils/tools';
 
 const Nav = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   return (
     <header className={styles.navHeader}>
       <Link href="/" >

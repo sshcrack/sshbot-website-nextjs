@@ -3,7 +3,6 @@ import ConsoleText from '../components/ConsoleText'
 import styles from "../styles/index.module.scss";
 import Discord from "../assets/svg/discordGradient.svg"
 import Link from 'next/link';
-import LoadingDots from 'components/LoadingDots';
 
 const IndexPage = () => {
   return (
