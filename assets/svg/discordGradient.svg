@@ -8,17 +8,17 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   aria-hidden="true"
-   focusable="false"
-   data-prefix="fab"
-   data-icon="discord"
-   class="svg-inline--fa fa-discord fa-w-14"
-   role="img"
-   viewBox="0 0 3176.9158 512"
-   version="1.1"
-   id="svg4"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    sodipodi:docname="discordGradient.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+   id="svg4"
+   version="1.1"
+   viewBox="0 0 3176.9158 512"
+   role="img"
+   class="svg-inline--fa fa-discord fa-w-14"
+   data-icon="discord"
+   data-prefix="fab"
+   focusable="false"
+   aria-hidden="true">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -27,94 +27,96 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs8">
     <linearGradient
-       id="linearGradient851"
+       inkscape:collect="always"
+       id="linearGradient851">
+      <stop
+         style="stop-color:#5fd1f9;stop-opacity:1"
+         offset="0"
+         id="stop847" />
+      <stop
+         style="stop-color:#5558da;stop-opacity:1"
+         offset="1"
+         id="stop849" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1753"
        inkscape:collect="always">
       <stop
-         id="stop847"
+         id="stop1749"
          offset="0"
          style="stop-color:#5fd1f9;stop-opacity:1" />
       <stop
-         id="stop849"
+         id="stop1751"
          offset="1"
          style="stop-color:#5558da;stop-opacity:1" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
-       id="linearGradient1753">
-      <stop
-         style="stop-color:#5fd1f9;stop-opacity:1"
-         offset="0"
-         id="stop1749" />
-      <stop
-         style="stop-color:#5558da;stop-opacity:1"
-         offset="1"
-         id="stop1751" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient1753"
-       id="linearGradient1755"
-       x1="0"
-       y1="256"
-       x2="3223.8013"
+       gradientUnits="userSpaceOnUse"
        y2="271.04108"
-       gradientUnits="userSpaceOnUse" />
+       x2="3223.8013"
+       y1="256"
+       x1="0"
+       id="linearGradient1755"
+       xlink:href="#linearGradient1753"
+       inkscape:collect="always" />
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient851"
-       id="linearGradient845"
-       x1="-14.45647"
-       y1="265.03531"
-       x2="3175.6047"
+       gradientUnits="userSpaceOnUse"
        y2="279.49176"
-       gradientUnits="userSpaceOnUse" />
+       x2="3175.6047"
+       y1="265.03531"
+       x1="-14.45647"
+       id="linearGradient845"
+       xlink:href="#linearGradient851"
+       inkscape:collect="always" />
   </defs>
   <sodipodi:namedview
-     fit-margin-bottom="0"
-     fit-margin-right="0"
-     fit-margin-left="0"
-     fit-margin-top="0"
-     inkscape:document-rotation="0"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     id="namedview6"
-     showgrid="false"
-     inkscape:zoom="0.20751953"
-     inkscape:cx="2714.3669"
-     inkscape:cy="-0.25346125"
-     inkscape:window-x="1358"
-     inkscape:window-y="-8"
+     inkscape:current-layer="svg4"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg4" />
+     inkscape:window-y="-8"
+     inkscape:window-x="1358"
+     inkscape:cy="-0.25346125"
+     inkscape:cx="2714.3669"
+     inkscape:zoom="0.20751953"
+     showgrid="false"
+     id="namedview6"
+     inkscape:window-height="1017"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <path
-     fill="currentColor"
-     d="m 297.216,243.2 c 0,15.616 -11.52,28.416 -26.112,28.416 -14.336,0 -26.112,-12.8 -26.112,-28.416 0,-15.616 11.52,-28.416 26.112,-28.416 14.592,0 26.112,12.8 26.112,28.416 z M 177.664,214.784 c -14.592,0 -26.112,12.8 -26.112,28.416 0,15.616 11.776,28.416 26.112,28.416 14.592,0 26.112,-12.8 26.112,-28.416 0.256,-15.616 -11.52,-28.416 -26.112,-28.416 z M 448,52.736 V 512 C 383.506,455.006 404.132,473.872 329.216,404.224 l 13.568,47.36 H 52.48 C 23.552,451.584 0,428.032 0,398.848 V 52.736 C 0,23.552 23.552,0 52.48,0 H 395.52 C 424.448,0 448,23.552 448,52.736 Z m -72.96,242.688 c 0,-82.432 -36.864,-149.248 -36.864,-149.248 -36.864,-27.648 -71.936,-26.88 -71.936,-26.88 l -3.584,4.096 c 43.52,13.312 63.744,32.512 63.744,32.512 -60.811,-33.329 -132.244,-33.335 -191.232,-7.424 -9.472,4.352 -15.104,7.424 -15.104,7.424 0,0 21.248,-20.224 67.328,-33.536 l -2.56,-3.072 c 0,0 -35.072,-0.768 -71.936,26.88 0,0 -36.864,66.816 -36.864,149.248 0,0 21.504,37.12 78.08,38.912 0,0 9.472,-11.52 17.152,-21.248 -32.512,-9.728 -44.8,-30.208 -44.8,-30.208 3.766,2.636 9.976,6.053 10.496,6.4 43.21,24.198 104.588,32.126 159.744,8.96 8.96,-3.328 18.944,-8.192 29.44,-15.104 0,0 -12.8,20.992 -46.336,30.464 7.68,9.728 16.896,20.736 16.896,20.736 56.576,-1.792 78.336,-38.912 78.336,-38.912 z"
+     class="discordLogo"
+     style="fill:url(#linearGradient1755);fill-opacity:1"
      id="path2"
-     style="fill:url(#linearGradient1755);fill-opacity:1" />
+     d="m 297.216,243.2 c 0,15.616 -11.52,28.416 -26.112,28.416 -14.336,0 -26.112,-12.8 -26.112,-28.416 0,-15.616 11.52,-28.416 26.112,-28.416 14.592,0 26.112,12.8 26.112,28.416 z M 177.664,214.784 c -14.592,0 -26.112,12.8 -26.112,28.416 0,15.616 11.776,28.416 26.112,28.416 14.592,0 26.112,-12.8 26.112,-28.416 0.256,-15.616 -11.52,-28.416 -26.112,-28.416 z M 448,52.736 V 512 C 383.506,455.006 404.132,473.872 329.216,404.224 l 13.568,47.36 H 52.48 C 23.552,451.584 0,428.032 0,398.848 V 52.736 C 0,23.552 23.552,0 52.48,0 H 395.52 C 424.448,0 448,23.552 448,52.736 Z m -72.96,242.688 c 0,-82.432 -36.864,-149.248 -36.864,-149.248 -36.864,-27.648 -71.936,-26.88 -71.936,-26.88 l -3.584,4.096 c 43.52,13.312 63.744,32.512 63.744,32.512 -60.811,-33.329 -132.244,-33.335 -191.232,-7.424 -9.472,4.352 -15.104,7.424 -15.104,7.424 0,0 21.248,-20.224 67.328,-33.536 l -2.56,-3.072 c 0,0 -35.072,-0.768 -71.936,26.88 0,0 -36.864,66.816 -36.864,149.248 0,0 21.504,37.12 78.08,38.912 0,0 9.472,-11.52 17.152,-21.248 -32.512,-9.728 -44.8,-30.208 -44.8,-30.208 3.766,2.636 9.976,6.053 10.496,6.4 43.21,24.198 104.588,32.126 159.744,8.96 8.96,-3.328 18.944,-8.192 29.44,-15.104 0,0 -12.8,20.992 -46.336,30.464 7.68,9.728 16.896,20.736 16.896,20.736 56.576,-1.792 78.336,-38.912 78.336,-38.912 z"
+     fill="currentColor" />
   <text
-     id="text2356"
-     y="401.20001"
-     x="517.92828"
+     class="discordText"
+     xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;line-height:1.25;font-family:Alta;-inkscape-font-specification:Alta;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient845);fill-opacity:1;stroke:none"
-     xml:space="preserve"><tspan
-       y="401.20001"
-       x="517.92828"
-       id="tspan2354"
+     x="517.92828"
+     y="401.20001"
+     id="text2356"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;font-family:Alata;-inkscape-font-specification:Alata;fill:url(#linearGradient845);fill-opacity:1"
        sodipodi:role="line"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;font-family:Alata;-inkscape-font-specification:Alata;fill:url(#linearGradient845);fill-opacity:1">Add to Discord</tspan></text>
+       id="tspan2354"
+       x="517.92828"
+       y="401.20001">Add to Discord</tspan></text>
 </svg>

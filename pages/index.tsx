@@ -1,8 +1,9 @@
-import Layout from '../components/Layout'
-import ConsoleText from '../components/ConsoleText'
-import styles from "../styles/index.module.scss";
-import Discord from "../assets/svg/discordGradient.svg"
 import Link from 'next/link';
+import React from 'react';
+import Discord from "../assets/svg/discordGradientVars.svg";
+import ConsoleText from '../components/ConsoleText';
+import Layout from '../components/Layout';
+import styles from "../styles/index.module.scss";
 
 const IndexPage = () => {
   return (
@@ -37,7 +38,7 @@ const IndexPage = () => {
           <button className={styles.joinButton}>
             <Link href="/api/auth/guild">
               <a>
-                <Discord />
+                  <Discord />
               </a>
             </Link>
           </button>
@@ -46,5 +47,4 @@ const IndexPage = () => {
     </Layout >
   )
 }
-
 export default IndexPage
