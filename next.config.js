@@ -1,7 +1,6 @@
 const Dotenv = require("dotenv-webpack");
 const withPlugins = require('next-compose-plugins');
 const withImg = require("next-img");
-const helmet = require("helmet");
 
 const nextConfig = {
   generateEtags: true,
