@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "dist": "next-pkg"
+    "dist": "next-pkg",
+    "buildStart": "npm run build && npm start"
   },
   "dependencies": {
     "@svgr/webpack": "^5.4.0",
