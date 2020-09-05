@@ -54,6 +54,30 @@
     }
 }
 
+.signIn {
+    &:hover {
+        --fa-primary-color: var(--signInPrimary);
+        --fa-secondary-color: var(--signInSecondary);
+    }
+
+    &::before {
+        color: var(--signInPrimary);
+        font-size: 2rem;
+    }
+}
+
+.signOut {
+    &:hover {
+        --fa-primary-color: var(--logoutPrimary);
+        --fa-secondary-color: var(--logoutSecondary);
+    }
+
+    &::before {
+        color: var(--logoutPrimary);
+        font-size: 2rem;
+    }
+}
+
 .music {
     &:hover {
         --fa-primary-color: var(--musicPrimary);
