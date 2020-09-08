@@ -65,7 +65,7 @@ export class AnimatedText extends Component<Props> {
   public animateOut() {
     let rules = getStyle(`.${this.normalClass}`, this.mainDiv);
     if(rules === undefined) return;
-    
+
     let animation = getAnimation(this.mainDiv, rules);
     animation.play();
   }
