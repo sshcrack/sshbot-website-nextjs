@@ -22,13 +22,13 @@
 
 .normalClass {
     color: var(--notActive);
-    font-size: 0px;
+    font-size: 0;
 }
 
 .singleText{
     margin-left: 0.5em;
 
     span {
-        font-size: 0rem;
+        font-size: 0;
     }
 }

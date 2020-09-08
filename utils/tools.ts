@@ -66,6 +66,9 @@ interface animateProp {
 }
 
 export function getAnimation(element: Element, toAnimate: animateProp) {
+  if (!isNull(toAnimate["font-size"]))
+    if (toAnimate["font-size"] === "0px")
+      toAnimate["font-size"] = "0rem";
   return anime({
     targets: element.children,
     direction: "alternate",
