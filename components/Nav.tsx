@@ -1,13 +1,14 @@
-import { session, signIn, signOut, useSession } from "next-auth/client";
+import { session, signOut, useSession } from "next-auth/client";
+import Link from 'next/link';
+import { openLoginWindow } from 'pages';
+import { isNull } from 'utils/tools';
 import gavel from "../assets/svg/gavel.svg";
-import signInSVG from "../assets/svg/sign-in.svg";
-import signOutSVG from "../assets/svg/sign-out.svg";
 import music from "../assets/svg/music.svg";
 import economy from "../assets/svg/sack-dollar.svg";
+import signInSVG from "../assets/svg/sign-in.svg";
+import signOutSVG from "../assets/svg/sign-out.svg";
 import styles from "../styles/nav.module.scss";
 import NavItem from "./NavItem";
-import Link from 'next/link';
-import { isNull } from 'utils/tools';
 
 const Nav = () => {
   const [session] = useSession();
@@ -70,7 +71,7 @@ function SignInMenu(_props: {}) {
     hoverClass={styles.signIn}
     text="Sign In"
     onClick={() => {
-      signIn("discord");
+      openLoginWindow()
     }}
     />
   );
@@ -83,9 +84,7 @@ function SignOutMenu(_props: {}) {
     hoverClass={styles.signOut}
     text="Sign Out"
     onClick={() => {
-      signOut({
-        callbackUrl: "http://localhost:3000/loggedOut"
-      });
+      signOut().then(() => location.pathname = "/loggedOut");
     }}
     />
   );

@@ -8,7 +8,7 @@ export default function customDiscord(options: Options) {
         params: { grant_type: 'authorization_code' },
         accessTokenUrl: 'https://discordapp.com/api/oauth2/token',
         authorizationUrl:
-            'https://discordapp.com/api/oauth2/authorize?response_type=code&prompt=consent',
+            'https://discordapp.com/api/oauth2/authorize?response_type=code&prompt=none',
         profileUrl: 'https://discordapp.com/api/users/@me',
         profile: (profile: Profile) => {
             return {

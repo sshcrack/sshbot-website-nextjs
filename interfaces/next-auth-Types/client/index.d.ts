@@ -34,8 +34,8 @@ declare function getProviders(context: NextContext): Promise<GetProvidersRespons
 declare function providers(context: NextContext): Promise<GetProvidersResponse | null>;
 declare function getCsrfToken(context: NextContext): Promise<string | null>;
 declare function csrfToken(context: NextContext): Promise<string | null>;
-declare function signIn(provider ?: Provider | string, data ?: GenericObject): Promise<void>;
-declare function signOut(context ?: NextContext | GenericObject): Promise<void>;
+declare function signIn(provider ?: Provider | string, data ?: GenericObject): Promise<string>;
+declare function signOut(context ?: NextContext | GenericObject): Promise<string>;
 declare function Provider(_ref11: any): React.FunctionComponentElement<React.ProviderProps<any>>;
 
 export { useSession, getSession, session, getProviders, providers, getCsrfToken, csrfToken, signIn, signOut, Provider };

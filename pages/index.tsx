@@ -1,9 +1,10 @@
-import Link from 'next/link';
 import React from 'react';
 import Discord from "../assets/svg/discordGradientVars.svg";
 import ConsoleText from '../components/ConsoleText';
 import Layout from '../components/Layout';
 import styles from "../styles/index.module.scss";
+import io from "socket.io-client"
+import { parseCookies } from 'nookies';
 
 const IndexPage = () => {
   return (
@@ -35,16 +36,34 @@ const IndexPage = () => {
         </div>
 
         <div className={styles.buttonWrapper}>
-          <button className={styles.joinButton}>
-            <Link href="/api/auth/guild">
-              <a>
-                  <Discord />
-              </a>
-            </Link>
+          <button className={styles.joinButton} onClick={() => openLoginWindow()}>
+              <Discord />
           </button>
         </div>
       </div >
     </Layout >
   )
 }
+
+export const openLoginWindow = () => {
+  fetch('/api/socket').finally(() => {
+    const cookies = parseCookies();
+    const socket = io()
+
+    socket.on('connect', () =>
+      socket.emit("register", cookies.websocketSession)
+    )
+
+    socket.on("logged_in", () => {
+      if (typeof window !== "undefined") window.location.pathname = "/dashboard";
+    })
+  })
+
+  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login` );
+}
+
+export const newWindow = (url: string, width = 500, height = 777) => {
+  return window.open(url, 'newwindow', `width=${width}, height=${height}`);
+}
+
 export default IndexPage

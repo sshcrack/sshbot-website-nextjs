@@ -1,14 +1,27 @@
 import Head from 'next/head';
+import { parseCookies, setCookie } from 'nookies';
 import React, { ReactNode } from 'react';
+import { rack as rackConstructor} from "hat"
 import Nav from "./Nav";
+const rack = rackConstructor();
 
 type Props = {
   children?: ReactNode
   title?: string
 }
 
-const Layout = ({ children, title = 'Title not given.' }: Props) => (
-  <div>
+const Layout = ({ children, title = 'Title not given.' }: Props) => {
+  const cookie = parseCookies();
+
+  if (!cookie?.websocketSession)
+    setCookie(null, 'websocketSession', rack(), {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+      sameSite: true
+    });
+
+
+  return <>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -29,7 +42,7 @@ const Layout = ({ children, title = 'Title not given.' }: Props) => (
         <span>© 2020 sshbot</span>
       </footer>
     </div>
-  </div>
-)
+  </>
+}
 
 export default Layout

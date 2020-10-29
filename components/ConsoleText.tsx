@@ -102,10 +102,8 @@ export default class ConsoleText extends Component<Props> {
     public nextElement(shift = true) {
         if (shift) {
             let next = this.text.shift();
-            if (next === undefined) {
-                console.log("Next null");
+            if (next === undefined)
                 throw new Error("No text given for Console Text");
-            }
 
             this.text.push(next);
 

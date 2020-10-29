@@ -1,6 +1,5 @@
 import LoadingDots from 'components/LoadingDots';
 import { useRouter } from 'next/router';
-import styles from "../../styles/loggedOut.module.scss"
 
 function ActiveLink() {
   if (typeof window !== 'undefined') {
@@ -10,9 +9,11 @@ function ActiveLink() {
   }
 
   return (
-    <div className={styles.root}>
-      <h1>Logged out. Redirecting</h1>
-      <LoadingDots type="h1" />
+    <div className={`center`} id="content-wrapper">
+      <div style={{flexDirection: "row", display: "flex"}}>
+        <h1>Logged out. Redirecting</h1>
+        <LoadingDots type="h1"/>
+      </div>
     </div>
   )
 }

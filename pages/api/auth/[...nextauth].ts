@@ -29,7 +29,11 @@ const options: InitOptions = {
     ],
 
     // A database is optional, but required to persist accounts in a database
-    database: dbOptions
+    database: dbOptions,
+    secret: process.env.NEXT_SECRET,
+    //@ts-ignore
+    redirectURL: "/redirects/close",
+    signOutRedirectUrl: "/loggedOut"
 }
 
 function undefinedToString(str: string | undefined): string {
