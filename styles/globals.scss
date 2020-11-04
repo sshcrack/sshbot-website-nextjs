@@ -81,32 +81,21 @@ a {
 }
 
 footer {
-  clear: both;
-  position: relative;
-  height: 200px;
-  margin-top: -200px;
-
+  grid-row: 999;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #page-container {
-  padding-bottom: 2.5rem;    /* Footer height */
   flex: 1;
 }
 
 #content-wrapper {
   min-height: 100vh;
 
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;            /* Footer height */
+  display: grid;
+  grid-template-columns: auto;
 }
 
 .center {

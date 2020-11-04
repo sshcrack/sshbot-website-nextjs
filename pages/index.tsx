@@ -55,7 +55,7 @@ export const openLoginWindow = () => {
     )
 
     socket.on("logged_in", () => {
-      if (typeof window !== "undefined") window.location.pathname = "/dashboard";
+      if (typeof window !== "undefined") window.location.pathname = "/guilds/overview";
     })
   })
 

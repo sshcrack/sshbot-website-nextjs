@@ -47,7 +47,10 @@ function SocketPage() {
   })
 
   if(data?.connected) socket?.emit("listen", cookies.websocketSession)
-  if (data?.registered && typeof window !== "undefined") signIn("discord", { redirect: true })
+  if (data?.registered && typeof window !== "undefined") {
+    console.log("Discord login");
+    signIn("custom_discord", { redirect: true })
+  }
 
   return <>
     <h1>{data?.data}</h1>

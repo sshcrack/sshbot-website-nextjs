@@ -1,7 +1,7 @@
 export default function customDiscord(options: Options) {
     return {
-        id: 'discord',
-        name: 'Discord',
+        id: 'custom_discord',
+        name: 'CustomDiscord',
         type: 'oauth',
         version: '2.0',
         scope: 'identify guilds',

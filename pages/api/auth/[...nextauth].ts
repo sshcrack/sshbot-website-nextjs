@@ -3,11 +3,11 @@ import NextAuth, { InitOptions } from 'next-auth';
 import { ConnectionOptions } from 'typeorm';
 import DiscordProvider from "../../../interfaces/customDiscordProvider";
 
-const port = parseInt(undefinedToString(process.env.DATABASE_PORT));
-const host = undefinedToString(process.env.DATABASE_HOST);
-const username = undefinedToString(process.env.DATABASE_USERNAME);
-const password = undefinedToString(process.env.DATABASE_PASSWORD);
-const database = undefinedToString(process.env.DATABASE_DATABASE);
+const port = parseInt(undefinedToString(process.env.TYPEORM_PORT));
+const host = undefinedToString(process.env.TYPEORM_HOST);
+const username = undefinedToString(process.env.TYPEORM_USERNAME);
+const password = undefinedToString(process.env.TYPEORM_PASSWORD);
+const database = undefinedToString(process.env.TYPEORM_DATABASE);
 
 let dbOptions: ConnectionOptions = {
     type: "postgres",

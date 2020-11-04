@@ -1,0 +1,82 @@
+.button {
+    cursor: pointer;
+    color: var(--color);
+    display: block;
+    position: relative;
+    border: 2px solid var(--anim);
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    user-zoom: none;
+    background-image: none;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    //color: #000 !important;
+    background-color: transparent;
+}
+
+.button:link, .button:visited {
+    position: relative;
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 15px;
+    border-radius: 0;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.button::before {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 0px;
+    z-index: -1;
+    content: "";
+    //color: #000 !important;
+    background: var(--anim);
+    transition: all 0.1s cubic-bezier(0.42,0,0.58,1);
+}
+
+.button:hover::before {
+    left: 0%;
+    right: auto;
+    width: 100%;
+}
+
+
+.button:link:hover::after, .button:visited:hover::after {
+    height: 450%;
+}
+
+.button:visited::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    z-index: -1;
+    transition: all .75s ease 0s;
+}
+
+.button::after {
+    content: "";
+    position: absolute;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    z-index: -1;
+    transition: all .75s ease 0s;
+}

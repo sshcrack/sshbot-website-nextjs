@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { parseCookies, setCookie } from 'nookies';
 import React, { ReactNode } from 'react';
-import { rack as rackConstructor} from "hat"
+import hat from "hat"
 import Nav from "./Nav";
-const rack = rackConstructor();
+const rack = hat.rack();
 
 type Props = {
   children?: ReactNode
@@ -20,7 +20,6 @@ const Layout = ({ children, title = 'Title not given.' }: Props) => {
       sameSite: true
     });
 
-
   return <>
     <Head>
       <title>{title}</title>
@@ -34,7 +33,7 @@ const Layout = ({ children, title = 'Title not given.' }: Props) => {
     <div id={"content-wrapper"}>
       <Nav></Nav>
 
-      <div id={"page-container"} className={"center"}>
+      <div id={"page-container"} className={"center"} key={hat()}>
         {children}
       </div>
 
