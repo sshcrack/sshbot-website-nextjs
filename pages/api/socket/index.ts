@@ -10,9 +10,10 @@ const ioHandler = (_req: NextApiRequest, res: ResponseSocket) => {
   if (!res.socket.server.io) {
     console.log('*First use, starting socket.io')
 
+    //@ts-ignore
     const io = new Socket(res.socket.server)
 
-    io.on('connection', socket => {
+    io.on('connection', (socket: Socket.Socket) => {
       socket.on('register', (id: string) => {
         const listener = listeners.get(id);
         connections.set(id, socket)
@@ -55,6 +56,7 @@ export const config = {
   }
 }
 
+//@ts-ignore
 export interface ResponseSocket extends NextApiResponse<any> {
   socket: {
     server: ServerInterface

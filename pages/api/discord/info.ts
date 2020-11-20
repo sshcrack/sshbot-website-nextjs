@@ -5,7 +5,8 @@ import initializeDatabase from 'database/initialize';
 import hat from 'hat';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
-import { checkToken, isNull, RejectType } from 'utils/tools';
+import { checkToken } from 'utils/serverTools';
+import { isNull, RejectType } from 'utils/tools';
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(e.status).send({ error: JSON.parse(e.response.text).error_description });
   })
   if (sql === undefined)
-    if (res.finished) return;
+    if (res.writableEnded) return;
     else return res.status(500).send({ error: "Internal Server Error" });
 
   const mode = (req.query.mode as string) || "basic"

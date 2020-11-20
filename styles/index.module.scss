@@ -16,11 +16,8 @@
     font-size: 3rem;
 }
 
-.joinButton {
+.basicActionButton {
     flex: 1;
-
-    --gradientOne: rgba(95, 209, 249, 1);
-    --gradientTwo: rgba(85, 88, 218, 1);
 
     width: 100%;
     height: 100%;
@@ -43,6 +40,17 @@
     svg {
         width: 15rem;
     }
+}
+
+.joinButton {
+    --gradientOne: rgba(95, 209, 249, 1);
+    --gradientTwo: rgba(85, 88, 218, 1);
+}
+
+.dashboardButton {
+    --gradientOne: #08AEEA;
+    --gradientTwo: #2AF598;
+
 }
 
 .buttonWrapper {

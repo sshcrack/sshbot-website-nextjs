@@ -37,6 +37,6 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/_app.tx",
-    "interfaces/custom.d.ts", "components/SingleTextTest.tsx", "pages/api/auth/[...nextauth].ts"
+    "interfaces/custom.d.ts", "components/SingleTextTest.tsx", "pages/api/auth/[...nextauth].ts", "components/Modes/Alerts"
   ]
 }

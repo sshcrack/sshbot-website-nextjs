@@ -11,7 +11,7 @@ const Guild = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter();
   const { guild, mode } = router.query;
-
+  const baseUrl = `/dashboard/${guild}`;
 
 
   useEffect(() => {
@@ -32,16 +32,17 @@ const Guild = () => {
   if (typeof response === "string") return <h1>{response}</h1>
   const infoResp: InfoInterface = response
 
+  console.log("Resp", infoResp);
 
   if (typeof window !== "undefined") {
     if (isNull(mode?.length)) {
-      router.push(`/dashboard/${guild}`)
+      router.push(baseUrl)
       return <h1>Redirecting</h1>
     }
 
 
     if (!Object.keys(Mode).map(v => v.toLowerCase()).includes((mode as string).toLowerCase())) {
-      router.push(`/dashboard/${guild}`)
+      router.push(baseUrl)
       return <h1>Redirecting</h1>
     }
   }
@@ -59,7 +60,7 @@ const Guild = () => {
   }
 
 
-  return <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode}></DashNav>}>
+  return <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}></DashNav>}>
   </Layout>
 }
 
@@ -81,8 +82,8 @@ export interface GuildInterface {
 }
 
 export enum Mode {
+  Basic = "basic",
   Moderation = "moderation",
   Alerts = "alerts",
-  Ranking = "ranking",
-  Commands = "commands"
+  Miscellaneous = "miscellaneous"
 }

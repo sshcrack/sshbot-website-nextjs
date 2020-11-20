@@ -51,13 +51,27 @@
         }
     }
 
-    &:hover svg, .active svg {
+    span,
+    &.active span {
+        -webkit-text-fill-color: var(--primary-font-color);
+        background-clip: text;
+        transition: all ease-in-out 0.2s;
+    }
+
+    &:hover span,
+    &.active span {
+        -webkit-text-fill-color: transparent;
+    }
+
+    &:hover svg,
+    &.active svg {
         width: var(--svgHoverSize);
         --fa-primary-color: var(--moderationPrimary);
         --fa-secondary-color: var(--moderationSecondary);
     }
 
-    &::before {
+    &::before,
+    &.active::before {
         position: absolute;
         display: block;
         top: 0;
@@ -71,7 +85,8 @@
         transition: all 0.1s cubic-bezier(0.42, 0, 0.58, 1);
     }
 
-    &:hover::before, .active {
+    &:hover::before,
+    &.active::before {
         content: "";
         left: 0%;
         right: auto;
@@ -79,7 +94,8 @@
         z-index: -1;
     }
 
-    &:hover, .active {
+    &:hover,
+    &.active {
         font-size: var(--fontHoverSize);
     }
 }
@@ -93,4 +109,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.Basic {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+
+.Moderation {
+    background: #ffe259;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #ffa751, #ffe259);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #ffa751, #ffe259);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.Alerts {
+    background: #bc4e9c;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #f80759, #bc4e9c);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #f80759, #bc4e9c);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.Miscellaneous {
+    background: #11998e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #38ef7d, #11998e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #38ef7d, #11998e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

@@ -3,9 +3,10 @@ import sessions from 'database/constructs/sessions';
 import initializeDatabase from 'database/initialize';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession, Session } from 'next-auth/client';
-import { checkToken, isNull, RejectType } from 'utils/tools';
+import { isNull, RejectType } from 'utils/tools';
 import fetch from "node-fetch"
 import hat from "hat"
+import { checkToken } from 'utils/serverTools';
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(e.status).send({ error: JSON.parse(e.response.text).error_description });
   })
   if (sql === undefined)
-    if (res.finished) return;
+    if (res.writableEnded) return;
     else return res.status(500).send({ error: "Internal Server Error" });
 
   dbAcc = sql;

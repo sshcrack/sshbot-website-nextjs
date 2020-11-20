@@ -1,12 +1,25 @@
 import React from 'react';
 import Discord from "../assets/svg/discordGradientVars.svg";
+import Dashboard from "../assets/svg/toDashboard.svg";
 import ConsoleText from '../components/ConsoleText';
 import Layout from '../components/Layout';
 import styles from "../styles/index.module.scss";
 import io from "socket.io-client"
 import { parseCookies } from 'nookies';
+import { useSession } from 'next-auth/client';
 
 const IndexPage = () => {
+  const [ session ] = useSession();
+
+  const button = session ?
+    <button className={`${styles.basicActionButton} ${styles.dashboardButton}`} onClick={() => toDashboard()}>
+        <Dashboard />
+    </button>
+    :
+    <button className={`${styles.basicActionButton} ${styles.joinButton}`} onClick={() => openLoginWindow()}>
+      <Discord />
+    </button>
+
   return (
     <Layout title="Home | sshbot">
       <div className={styles.wrapper}>
@@ -36,9 +49,7 @@ const IndexPage = () => {
         </div>
 
         <div className={styles.buttonWrapper}>
-          <button className={styles.joinButton} onClick={() => openLoginWindow()}>
-              <Discord />
-          </button>
+          {button}
         </div>
       </div >
     </Layout >
@@ -59,7 +70,11 @@ export const openLoginWindow = () => {
     })
   })
 
-  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login` );
+  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login`);
+}
+
+const toDashboard = () => {
+  if (typeof window !== "undefined") window.location.pathname = "/dashboard"
 }
 
 
@@ -77,7 +92,7 @@ export const openJoinWindow = (guild: string) => {
     })
   })
 
-  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/guild?id=${guild}` );
+  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/guild?id=${guild}`);
 }
 
 
