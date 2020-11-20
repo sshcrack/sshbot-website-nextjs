@@ -1,21 +1,34 @@
+import accounts from 'database/constructs/accounts';
+import sessions from 'database/constructs/sessions';
+import { SessionSQL } from 'database/entities/Session';
+import initializeDatabase from 'database/initialize';
+import hat from 'hat';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ResponseInterface } from 'pages/guilds/overview';
-import { isNull } from 'utils/tools';
+import { getSession } from 'next-auth/client';
+import { checkToken, isNull, RejectType } from 'utils/tools';
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const conn = await initializeDatabase(hat());
+
   const id = req.query.id as string
+  const session = await getSession({ req });
+  if (session === null || isNull(session?.accessToken)) return res.send({ error: "No session" })
+  const dbSession = await new sessions(conn, { where: { access_token: session.accessToken } }).get() as SessionSQL
+  if (isNull(dbSession)) return res.status(401).send({ error: "No Database entry found" })
+
+  let dbAcc = await new accounts(conn, { where: { user_id: dbSession?.user_id } }).get()
+  if (!dbAcc) return res.status(401).send({ error: "Account not found" })
+  const sql = await checkToken(dbAcc, conn).catch((e: RejectType) => {
+    res.status(e.status).send({ error: JSON.parse(e.response.text).error_description });
+  })
+  if (sql === undefined)
+    if (res.finished) return;
+    else return res.status(500).send({ error: "Internal Server Error" });
+
   const mode = (req.query.mode as string) || "basic"
-  const result = await fetch(`${process.env.NEXTAUTH_URL}/api/discord/guilds`)
-  const json: ResponseInterface = await result.json()
 
-  if(isNull(id)) return res.send({ error: "No Guild ID given"})
-  if (json.error) return res.send({ error: json.error })
-
-  const found = json.guilds.find(g => g.id === id)
-  if (isNull(found)) return res.send({ error: "Access denied" })
-
-  const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}`)
+  const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
   const guild = await resultBot.json()
 
   res.send(guild)

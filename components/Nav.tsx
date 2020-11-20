@@ -1,5 +1,4 @@
-import { session, signOut, useSession } from "next-auth/client";
-import Link from 'next/link';
+import { Session, signOut, useSession } from "next-auth/client";
 import { openLoginWindow } from 'pages';
 import { isNull } from 'utils/tools';
 import gavel from "../assets/svg/gavel.svg";
@@ -8,20 +7,14 @@ import economy from "../assets/svg/sack-dollar.svg";
 import signInSVG from "../assets/svg/sign-in.svg";
 import signOutSVG from "../assets/svg/sign-out.svg";
 import styles from "../styles/nav.module.scss";
+import BotIcon from './BotIcon';
 import NavItem from "./NavItem";
 
 const Nav = () => {
   const [session] = useSession();
   return (
     <header className={styles.navHeader}>
-      <Link href="/" >
-        <a className={styles.linkBotLogo}>
-          <div className={styles.botLogo}>
-            <img src="/imgs/botIcon.png"></img>
-            <h1>sshbot</h1>
-          </div>
-        </a>
-      </Link>
+      <BotIcon />
 
       <ul className={styles.navUl}>
         <li>
@@ -57,7 +50,7 @@ const Nav = () => {
 };
 
 interface SignInOutProps {
-  session: session;
+  session: Session;
 }
 
 function CheckLoggedIn(props: SignInOutProps) {

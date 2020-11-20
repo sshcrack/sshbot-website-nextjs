@@ -1,29 +1,3 @@
-.botLogo {
-    display: flex;
-    justify-content: space-evenly;
-    flex: 0 0;
-    cursor: pointer;
-    color: var(--primary-font-color);
-
-    & > * {
-        margin: auto;
-    }
-
-    img {
-        width: 4em;
-        height: 4em;
-        flex: 1;
-    }
-
-    h1 {
-        margin-left: 0.1em;
-    }
-}
-
-.linkBotLogo {
-    margin-left: 2em;
-}
-
 .navHeader {
     display: flex;
     justify-content: space-evenly;

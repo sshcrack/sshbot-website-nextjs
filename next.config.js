@@ -1,6 +1,6 @@
-const Dotenv = require("dotenv-webpack");
+const Dotenv = require('dotenv-webpack');
 const withPlugins = require('next-compose-plugins');
-const withImg = require("next-img");
+const withImg = require('next-img');
 
 const nextConfig = {
   generateEtags: true,
@@ -8,9 +8,11 @@ const nextConfig = {
   poweredByHeader: false,
   webpack: (config) => {
     // Add the new plugin to the existing webpack plugins
-    config.plugins.push(new Dotenv({
-      silent: true
-    }));
+    config.plugins.push(
+      new Dotenv({
+        silent: true,
+      })
+    );
 
     // Use SVGs as Components
     config.module.rules.push({
@@ -22,9 +24,20 @@ const nextConfig = {
     });
 
     return config;
-  }
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+        ],
+      },
+    ];
+  },
 };
 
-module.exports = withPlugins([
-  withImg
-], nextConfig);
+module.exports = withPlugins([withImg], nextConfig);

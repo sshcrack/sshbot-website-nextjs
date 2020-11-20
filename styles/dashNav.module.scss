@@ -1,0 +1,96 @@
+.nav {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.navOuter {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 1em;
+}
+
+.botIcon {
+    margin-left: 1em;
+}
+
+.navItem {
+    --fontSize: 1.5rem;
+    --fontHoverSize: calc(var(--fontSize) + 0.5rem);
+    --svgSize: 2.5rem;
+    --svgHoverSize: calc(var(--svgSize) + 0.25rem);
+
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 1rem 1rem;
+    cursor: pointer;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontSize);
+    transition: all 0.1s cubic-bezier(0.42, 0, 0.58, 1);
+    position: relative;
+    justify-content: center;
+
+    svg {
+        width: var(--svgSize);
+
+        color: var(--notActive);
+        --fa-secondary-opacity: 0.5;
+
+        path:nth-child(1) {
+            fill: var(--fa-secondary-color, currentColor);
+            opacity: var(--fa-secondary-opacity, 0.4);
+        }
+
+        path:nth-child(2) {
+            fill: var(--fa-primary-color, currentColor);
+            opacity: var(--fa-primary-opacity, 1);
+        }
+    }
+
+    &:hover svg, .active svg {
+        width: var(--svgHoverSize);
+        --fa-primary-color: var(--moderationPrimary);
+        --fa-secondary-color: var(--moderationSecondary);
+    }
+
+    &::before {
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 0;
+        z-index: -1;
+        content: "";
+        background: var(--hoverColor);
+
+        transition: all 0.1s cubic-bezier(0.42, 0, 0.58, 1);
+    }
+
+    &:hover::before, .active {
+        content: "";
+        left: 0%;
+        right: auto;
+        width: 100%;
+        z-index: -1;
+    }
+
+    &:hover, .active {
+        font-size: var(--fontHoverSize);
+    }
+}
+
+.spacer {
+    width: var(--svgHoverSize);
+    height: var(--fontHoverSize);
+    margin-right: 0.5em;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

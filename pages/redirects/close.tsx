@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
@@ -6,7 +7,10 @@ let socket: SocketIOClient.Socket;
 
 function SocketPage() {
   const [data, setData] = useState<Data>();
+  const router = useRouter()
   const cookies = parseCookies();
+
+  const {mode} = router.query
 
   useEffect(() => {
     if (!data?.emitted) {
@@ -40,7 +44,7 @@ function SocketPage() {
     }
   })
 
-  if(data?.connected) socket?.emit("callback", cookies.websocketSession)
+  if(data?.connected) socket?.emit("callback", mode === "bot" ? cookies.botSession : cookies.websocketSession)
   if (data?.finished && typeof window !== "undefined") window.close();
 
   return <>

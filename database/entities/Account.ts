@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn, Timestamp } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity("accounts")
 export class AccountSQL {
@@ -27,11 +27,11 @@ export class AccountSQL {
   access_token: string
 
   @Column({ nullable: true, type: "timestamp with time zone" })
-  access_token_expires: Timestamp
+  access_token_expires: string
 
   @Column({type: "timestamp with time zone" })
-  created_at: Timestamp
+  created_at: string
 
   @Column({type: "timestamp with time zone" })
-  updated_at: Timestamp
+  updated_at: string
 }

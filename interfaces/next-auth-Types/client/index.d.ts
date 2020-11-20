@@ -1,7 +1,7 @@
 // Minimum TypeScript Version: 3.8
 import { IncomingMessage } from 'http';
 
-interface session {
+interface Session {
   user: {
     name: string;
     email: string;
@@ -27,6 +27,7 @@ interface GenericObject {
   [key: string]: any;
 }
 
+
 declare function useSession(): [Session, boolean];
 declare function getSession(context: NextContext): Promise<Session | null>;
 declare function session(context: NextContext): Promise<Session | null>;
@@ -38,7 +39,7 @@ declare function signIn(provider ?: Provider | string, data ?: GenericObject): P
 declare function signOut(context ?: NextContext | GenericObject): Promise<string>;
 declare function Provider(_ref11: any): React.FunctionComponentElement<React.ProviderProps<any>>;
 
-export { useSession, getSession, session, getProviders, providers, getCsrfToken, csrfToken, signIn, signOut, Provider };
+export { useSession, getSession, Session, getProviders, providers, getCsrfToken, csrfToken, signIn, signOut, Provider };
 
 /**
  * TODO: `dtslint` throws when parsing Next types... the following types are copied directly from `next/types` ...

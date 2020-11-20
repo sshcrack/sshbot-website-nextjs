@@ -7,10 +7,11 @@ const rack = hat.rack();
 
 type Props = {
   children?: ReactNode
-  title?: string
+  title?: string,
+  nav?: JSX.Element
 }
 
-const Layout = ({ children, title = 'Title not given.' }: Props) => {
+const Layout = ({ children, title = 'Title not given.', nav: customNav }: Props) => {
   const cookie = parseCookies();
 
   if (!cookie?.websocketSession)
@@ -20,6 +21,14 @@ const Layout = ({ children, title = 'Title not given.' }: Props) => {
       sameSite: true
     });
 
+  if (!cookie?.botSession)
+    setCookie(null, 'botSession', rack(), {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+      sameSite: true
+    });
+
+  const Cnav = customNav ? customNav : <Nav></Nav>
   return <>
     <Head>
       <title>{title}</title>
@@ -31,7 +40,7 @@ const Layout = ({ children, title = 'Title not given.' }: Props) => {
     </Head>
 
     <div id={"content-wrapper"}>
-      <Nav></Nav>
+      {Cnav}
 
       <div id={"page-container"} className={"center"} key={hat()}>
         {children}

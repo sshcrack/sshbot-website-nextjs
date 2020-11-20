@@ -1,12 +1,15 @@
 import GuildsList, { FilteredGuilds } from 'components/GuildsList'
+import { TharButton } from 'components/TharButton'
+import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { DiscordGuilds } from 'pages/api/discord/guilds'
 import { useEffect, useState } from 'react'
 import Loader from "react-loader-spinner"
+import { HTTPStatusCodes } from 'utils/statusCodes'
 import { isNull } from 'utils/tools'
 import Layout from '../../components/Layout'
 
-const Overview = () => {
+const Dashboard = () => {
   const [response, setGuilds] = useState<ResponseInterface>()
   const [loading, setLoading] = useState(false)
   const router = useRouter();
@@ -16,28 +19,49 @@ const Overview = () => {
       setLoading(true)
       fetch(`${window.location.protocol}//${window.location.host}/api/discord/guilds`).then(res => {
         res.json().then(t => {
-          setGuilds(t)
-        });
+          setGuilds({
+            status: res.status,
+            ...t
+          })
+          //@ts-ignore
+        }).catch(async (e: Object) => setGuilds({
+          error: e.toString(),
+        }));
       })
     }
   })
 
   if (typeof window === "undefined") return null;
   if (!response)
-    return <Layout title="Dashboard | sshbot" key="Waiting">
-    <h1>Loading</h1>
-    <Loader type="Bars" color="#00BFFF" height={80} width={80} />
-  </Layout>
+    return <Layout title="Overview | sshbot" key="Waiting">
+      <h1>Loading</h1>
+      <Loader type="Bars" color="#00BFFF" height={80} width={80} />
+    </Layout>
 
   if (response.error === "No session") {
     router.push("/");
     return <h1>Redirecting</h1>
   }
 
-  if (!isNull(response.error)) {
+  if (response.error?.includes("unexpected character")) {
+    return <Layout title="Overview | sshbot" key="Error">
+    <h1>ERROR</h1>
+      <span>
+        500 INTERNAL SERVER ERROR
+      </span>
+  </Layout>
+  }
+
+  if (response.error || response.status !== HTTPStatusCodes.OK) {
     return <Layout title="Overview | sshbot" key="Error">
       <h1>ERROR</h1>
-      <span>{JSON.stringify(response.error)}</span>
+      <span>
+        {JSON.stringify(response.error)}
+
+        Trying to resolve your problem...
+        If this problem persists, please contact the developers!
+        </span>
+      <TharButton color="white" anim="red" width={"200px"} height={"100px"}><span onClick={() => signOut().then(() => location.pathname = "/loggedOut")}>Sign out</span></TharButton>
     </Layout>
   }
 
@@ -54,19 +78,20 @@ const Overview = () => {
 
     if (!isNull(permLevel))
       if (permLevel >= PermLevels.Administrator) {
-        const filteredGuilds = guild as FilteredGuilds;
+        const filteredGuilds = guild as FilteredGuilds
         filteredGuilds.permLevel = permLevel
+        filteredGuilds.botJoined = true
 
-        filtered.push(filteredGuilds)
+        return filtered.push(filteredGuilds)
       }
 
     if (isAdmin(parseInt(guild.permissions))) {
       const filteredGuilds = guild as FilteredGuilds;
       filteredGuilds.permLevel = permLevel
+      filteredGuilds.botJoined = false
 
       filtered.push(filteredGuilds)
     }
-
     return undefined
   })
 
@@ -75,7 +100,7 @@ const Overview = () => {
 
   return <Layout title="Overview | sshbot" key="Overview">
     <h1>Overview</h1>
-    <GuildsList guilds={filtered}/>
+    <GuildsList guilds={filtered} />
   </Layout>
 }
 
@@ -86,7 +111,8 @@ export function isAdmin(permCode: number) {
 export interface ResponseInterface {
   permLevels: { [key: string]: PermLevels },
   guilds: DiscordGuilds[],
-  error: undefined | string
+  error: undefined | string,
+  status: number
 }
 
 export enum PermLevels {
@@ -99,4 +125,4 @@ export enum PermLevels {
   BotOwner = 6
 }
 
-export default Overview
+export default Dashboard

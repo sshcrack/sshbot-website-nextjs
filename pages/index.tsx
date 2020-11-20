@@ -55,12 +55,31 @@ export const openLoginWindow = () => {
     )
 
     socket.on("logged_in", () => {
-      if (typeof window !== "undefined") window.location.pathname = "/guilds/overview";
+      if (typeof window !== "undefined") window.location.pathname = "/dashboard";
     })
   })
 
   if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login` );
 }
+
+
+export const openJoinWindow = (guild: string) => {
+  fetch('/api/socket').finally(() => {
+    const cookies = parseCookies();
+    const socket = io()
+
+    socket.on('connect', () =>
+      socket.emit("register", cookies.botSession)
+    )
+
+    socket.on("logged_in", () => {
+      if (typeof window !== "undefined") window.location.pathname = `/guilds/${guild}`;
+    })
+  })
+
+  if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/guild?id=${guild}` );
+}
+
 
 export const newWindow = (url: string, width = 500, height = 777) => {
   return window.open(url, 'newwindow', `width=${width}, height=${height}`);
