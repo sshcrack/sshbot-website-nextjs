@@ -3,7 +3,7 @@ import styles from "../styles/NavItem.module.scss";
 import { AnimatedText } from './AnimatedText';
 import Link from 'next/link';
 
-type svgType = React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+export type svgType = React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
 type Props = {
   children?: ReactNode;

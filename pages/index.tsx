@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Discord from "../assets/svg/discordGradientVars.svg";
 import Dashboard from "../assets/svg/toDashboard.svg";
 import ConsoleText from '../components/ConsoleText';
@@ -9,7 +9,17 @@ import { parseCookies } from 'nookies';
 import { useSession } from 'next-auth/client';
 
 const IndexPage = () => {
-  const [ session ] = useSession();
+  const [session] = useSession();
+  const [fetching, setFetching] = useState(false);
+  useEffect(() => {
+    if (typeof location === "undefined" || fetching) return;
+
+    setFetching(true);
+    fetch(`${window.location.protocol}//${window.location.host}/api/discord/refreshSession`).then(async res => {
+      const json = await res.json().catch(() => { });
+      if (json?.refreshed) location.reload();
+    })
+  });
 
   const button = session ?
     <button className={`${styles.basicActionButton} ${styles.dashboardButton}`} onClick={() => toDashboard()}>
@@ -73,7 +83,7 @@ export const openLoginWindow = () => {
   if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login`);
 }
 
-const toDashboard = () => {
+export const toDashboard = () => {
   if (typeof window !== "undefined") window.location.pathname = "/dashboard"
 }
 

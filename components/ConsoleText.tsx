@@ -145,7 +145,7 @@ export default class ConsoleText extends Component<Props> {
         });
 
         longestString += "_";
-        let longestStringInvisible = React.createElement(this.type, { className: `noOpacity ${this.sharedClass}` }, longestString);
+        let longestStringInvisible = React.createElement(this.type, { className: `noOpacity ${this.sharedClass} ${styles.longest}` }, longestString);
 
         let consoleInputEl = React.createElement(this.type, { ref: this.consoleInputRef, className: `${this.inputClass} ${this.sharedClass}` });
         let underscore = React.createElement(this.type, { ref: this.spanRef, className: `${this.underscoreClass} ${this.sharedClass}` }, "_");

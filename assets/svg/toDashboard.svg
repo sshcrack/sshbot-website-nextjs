@@ -8,17 +8,17 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   aria-hidden="true"
-   focusable="false"
-   data-prefix="fab"
-   data-icon="discord"
-   class="svg-inline--fa fa-dashboard fa-w-14"
-   role="img"
-   viewBox="0 0 3176.916 512"
-   version="1.1"
-   id="svg4"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    sodipodi:docname="toDashboard.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+   id="svg4"
+   version="1.1"
+   viewBox="0 0 2700.916 512"
+   role="img"
+   class="svg-inline--fa fa-dashboard fa-w-14"
+   data-icon="discord"
+   data-prefix="fab"
+   focusable="false"
+   aria-hidden="true">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -34,79 +34,79 @@
   <defs
      id="defs8">
     <linearGradient
-       id="linearGradient851"
-       inkscape:collect="always">
+       inkscape:collect="always"
+       id="linearGradient851">
       <stop
-         id="stop847"
+         style="stop-color:var(--gradientTwo);stop-opacity:1"
          offset="0"
-         style="stop-color:var(--gradientTwo);stop-opacity:1" />
+         id="stop847" />
       <stop
-         class="StepToAnimate"
-         style="stop-color:var(--gradientOne);stop-opacity:1"
+         id="stop2047"
          offset="var(--svgOffset)"
-         id="stop2047" />
+         style="stop-color:var(--gradientOne);stop-opacity:1"
+         class="StepToAnimate" />
       <stop
-         id="stop849"
+         style="stop-color:var(--gradientTwo);stop-opacity:1"
          offset="1"
-         style="stop-color:var(--gradientTwo);stop-opacity:1" />
+         id="stop849" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient851"
-       id="linearGradient845"
-       x1="-14.45647"
-       y1="265.03531"
-       x2="3175.6047"
+       gradientTransform="translate(163.02095,-0.20001221)"
+       gradientUnits="userSpaceOnUse"
        y2="279.49176"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(163.02095,-0.20001221)" />
-    <linearGradient
+       x2="3175.6047"
+       y1="265.03531"
+       x1="-14.45647"
+       id="linearGradient845"
        xlink:href="#linearGradient851"
-       y1="256"
-       gradientUnits="userSpaceOnUse"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient1755"
        x2="3223.8013"
-       id="linearGradient1755" />
+       gradientUnits="userSpaceOnUse"
+       y1="256"
+       xlink:href="#linearGradient851" />
   </defs>
   <sodipodi:namedview
-     fit-margin-bottom="0"
-     fit-margin-right="0"
-     fit-margin-left="0"
-     fit-margin-top="0"
-     inkscape:document-rotation="0"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="958"
-     inkscape:window-height="1008"
-     id="namedview6"
-     showgrid="false"
-     inkscape:zoom="0.14673847"
-     inkscape:cx="266.43047"
+     inkscape:current-layer="svg4"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-8"
+     inkscape:window-x="1358"
      inkscape:cy="948.89216"
-     inkscape:window-x="1359"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg4" />
+     inkscape:cx="266.43047"
+     inkscape:zoom="0.14673847"
+     showgrid="false"
+     id="namedview6"
+     inkscape:window-height="1017"
+     inkscape:window-width="1920"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <text
-     id="text2356"
-     y="401"
-     x="680.9491"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;line-height:1.25;font-family:Alta;-inkscape-font-specification:Alta;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient845);fill-opacity:1;stroke:none"
+     class="discordText"
      xml:space="preserve"
-     class="discordText"><tspan
-       y="401"
-       x="680.9491"
-       id="tspan2354"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;line-height:1.25;font-family:Alta;-inkscape-font-specification:Alta;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient845);fill-opacity:1;stroke:none"
+     x="680.9491"
+     y="401"
+     id="text2356"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;font-family:Alata;-inkscape-font-specification:Alata;fill:url(#linearGradient845);fill-opacity:1"
        sodipodi:role="line"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:400px;font-family:Alata;-inkscape-font-specification:Alata;fill:url(#linearGradient845);fill-opacity:1">Dashboard</tspan></text>
+       id="tspan2354"
+       x="680.9491"
+       y="401">Dashboard</tspan></text>
   <path
-     style="fill:url(#linearGradient1755);fill-opacity:1;stroke-width:0.999999"
-     fill="currentColor"
+     d="M 528.25711,0.16567527 H 48.257112 c -26.5,0 -47.9999995,21.49999973 -47.9999995,47.99999773 V 368.16568 c 0,26.5 21.4999995,48 47.9999995,48 H 240.25711 l -16,47.99998 h -72 c -13.3,0 -24,10.7 -24,24.00001 0,13.30001 10.7,24.00001 24,24.00001 h 272 c 13.3,0 24,-10.7 24,-24.00001 0,-13.30001 -10.7,-24.00001 -24,-24.00001 h -72 l -16,-47.99998 h 192 c 26.5,0 48,-21.5 48,-48 V 48.165673 c 0,-26.499998 -21.5,-47.99999773 -48,-47.99999773 z m -16,352.00000473 H 64.257108 V 64.165674 H 512.25711 Z"
      id="path2-4"
-     d="M 528.25711,0.16567527 H 48.257112 c -26.5,0 -47.9999995,21.49999973 -47.9999995,47.99999773 V 368.16568 c 0,26.5 21.4999995,48 47.9999995,48 H 240.25711 l -16,47.99998 h -72 c -13.3,0 -24,10.7 -24,24.00001 0,13.30001 10.7,24.00001 24,24.00001 h 272 c 13.3,0 24,-10.7 24,-24.00001 0,-13.30001 -10.7,-24.00001 -24,-24.00001 h -72 l -16,-47.99998 h 192 c 26.5,0 48,-21.5 48,-48 V 48.165673 c 0,-26.499998 -21.5,-47.99999773 -48,-47.99999773 z m -16,352.00000473 H 64.257108 V 64.165674 H 512.25711 Z" />
+     fill="currentColor"
+     style="fill:url(#linearGradient1755);fill-opacity:1;stroke-width:0.999999" />
 </svg>

@@ -1,5 +1,9 @@
 import DashNav from 'components/DashNav'
 import Layout from 'components/Layout'
+import { Alerts } from 'components/Modes/Alerts'
+import { Basic } from 'components/Modes/Basic'
+import { Miscellaneous } from 'components/Modes/Miscellaneous'
+import { Moderation } from 'components/Modes/Moderation'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Loader from 'react-loader-spinner'
@@ -32,8 +36,6 @@ const Guild = () => {
   if (typeof response === "string") return <h1>{response}</h1>
   const infoResp: InfoInterface = response
 
-  console.log("Resp", infoResp);
-
   if (typeof window !== "undefined") {
     if (isNull(mode?.length)) {
       router.push(baseUrl)
@@ -60,8 +62,12 @@ const Guild = () => {
   }
 
 
-  return <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}></DashNav>}>
-  </Layout>
+  const Component = ModeComponents[mode as Mode]
+  return <>
+    <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>}>
+      {<Component data={infoResp}/>}
+    </Layout>
+  </>
 }
 
 export default Guild
@@ -86,4 +92,11 @@ export enum Mode {
   Moderation = "moderation",
   Alerts = "alerts",
   Miscellaneous = "miscellaneous"
+}
+
+export const ModeComponents = {
+  basic: Basic,
+  moderation: Moderation,
+  alerts: Alerts,
+  miscellaneous: Miscellaneous
 }

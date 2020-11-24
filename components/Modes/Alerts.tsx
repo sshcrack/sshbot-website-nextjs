@@ -1,9 +1,7 @@
-export const Alerts = ({}: Props) => (
+import ModeProps from 'utils/modeProps';
+
+export const Alerts = ({}: ModeProps) => (
   <div>
     
   </div>
 )
-
-interface Props {
-
-}

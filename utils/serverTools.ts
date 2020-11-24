@@ -16,7 +16,7 @@ export function checkToken(user: AccountSQL, conn: Connection): Promise<AccountS
     const Accounts = new accounts(conn, { where: { user_id: user.user_id } });
 
     const now = moment()
-    if (!expiresAt.isBefore(now)) return resolve(user)
+    if (expiresAt.isBefore(now)) return resolve(user)
 
     const res = (await fetch.post(`https://discord.com/api/v8/oauth2/token`)
       .field('client_id', process.env.CLIENT_ID as string)

@@ -43,13 +43,15 @@ const Dashboard = () => {
     return <h1>Redirecting</h1>
   }
 
-  if (response.error?.includes("unexpected character")) {
-    return <Layout title="Overview | sshbot" key="Error">
-    <h1>ERROR</h1>
-      <span>
-        500 INTERNAL SERVER ERROR
-      </span>
-  </Layout>
+  if (response.error) {
+    if (response.error.includes("unexpected character")) {
+      return <Layout title="Overview | sshbot" key="Error">
+        <h1>ERROR</h1>
+        <span>
+          500 INTERNAL SERVER ERROR
+        </span>
+      </Layout>
+    }
   }
 
   if (response.error || response.status !== HTTPStatusCodes.OK) {

@@ -1,0 +1,28 @@
+.menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    background: var(--darkerBackground);
+
+    position: absolute;
+    top: 75px;
+    min-width: 200px;
+    border-radius: 4px;
+    padding: 0;
+
+    li {
+        padding: 5px;
+
+        &:hover {
+            background: var(--background-color);
+        }
+    }
+}
+
+.disabled {
+    display: none;
+}
+
+.enabled {
+    display: inherit;
+}

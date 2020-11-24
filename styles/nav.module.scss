@@ -86,3 +86,30 @@
     --fa-secondary-color: var(--dashboardSecondary);
     --fa-secondary-opacity: 1;
 }
+
+.profileDropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    width: 100%;
+    height: 100%;
+}
+
+.profileDropdown img {
+    --imgSize: calc(var(--svgNavSize) + 0.25em);
+
+    width: var(--imgSize);
+    height: var(--imgSize);
+    margin-right: .5em;
+}
+
+.profileDropdown span {
+    font-size: calc(var(--svgNavSize) - 1.25em);
+}
+
+.caret {
+    width: 0.75em;
+    margin-left: .25em;
+}

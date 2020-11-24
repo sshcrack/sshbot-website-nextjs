@@ -1,9 +1,7 @@
-export const Miscellaneous = ({}: Props) => (
+import ModeProps from 'utils/modeProps';
+
+export const Miscellaneous = ({}: ModeProps) => (
   <div>
     
   </div>
 )
-
-interface Props {
-
-}

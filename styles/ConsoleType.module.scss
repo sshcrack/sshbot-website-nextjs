@@ -28,3 +28,9 @@
 .underscoreInvisible {
     opacity: 0%;
 }
+
+.longest {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}

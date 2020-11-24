@@ -9,9 +9,7 @@ const registered = new Map<string, boolean>();
 const ioHandler = (_req: NextApiRequest, res: ResponseSocket) => {
   if (!res.socket.server.io) {
     console.log('*First use, starting socket.io')
-
-    //@ts-ignore
-    const io = new Socket(res.socket.server)
+    const io = new Socket.Server(res.socket.server)
 
     io.on('connection', (socket: Socket.Socket) => {
       socket.on('register', (id: string) => {

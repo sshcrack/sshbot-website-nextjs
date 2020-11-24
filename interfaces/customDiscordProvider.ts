@@ -1,3 +1,4 @@
+
 export default function customDiscord(options: Options) {
     return {
         id: 'custom_discord',
@@ -30,4 +31,14 @@ interface Profile {
 interface Options {
     clientId: string,
     clientSecret: string
+}
+
+export interface customSession {
+    accessToken: string,
+    expires: string,
+    user: {
+        id: string;
+        name: string;
+        image: string;
+    },
 }
