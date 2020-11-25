@@ -98,7 +98,7 @@ export const openJoinWindow = (guild: string) => {
     )
 
     socket.on("logged_in", () => {
-      if (typeof window !== "undefined") window.location.pathname = `/guilds/${guild}`;
+      if (typeof window !== "undefined") window.location.pathname = `/dashboard/${guild}`;
     })
   })
 
