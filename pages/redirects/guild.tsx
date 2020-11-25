@@ -53,7 +53,7 @@ function SocketPage() {
 
   if (data?.connected) socket?.emit("listen", cookies.botSession)
   if (data?.registered && typeof window !== "undefined")
-    window.location.href = `https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=8&response_type=code&redirect_uri=${isNull(redirectUrl) ? `${location.protocol}://${location.host}` : redirectUrl}/redirects/close?mode=bot&guild_id=${id}&disable_guild_select=true`
+    window.location.href = `https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=8&response_type=code&redirect_uri=${isNull(redirectUrl) ? `${location.protocol}//${location.host}` : redirectUrl}/redirects/close?mode=bot&guild_id=${id}&disable_guild_select=true`
 
   return <>
     <h1>{data?.data}</h1>
