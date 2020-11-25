@@ -1,6 +1,6 @@
 import ModeProps from 'utils/modeProps';
 
-export const Basic = ({}: ModeProps) => (
+export const Basic = ({ data }: ModeProps) => (
   <div>
     <span>Data {JSON.stringify(data)}</span>
   </div>
