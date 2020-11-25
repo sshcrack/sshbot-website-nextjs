@@ -5,6 +5,7 @@ import io from "socket.io-client";
 
 let socket: SocketIOClient.Socket;
 const clientID = process.env.CLIENT_ID;
+const redirectUrl = process.env.NEXTAUTH_URL;
 
 function SocketPage() {
   const [data, setData] = useState<Data>({
@@ -51,7 +52,7 @@ function SocketPage() {
 
   if (data?.connected) socket?.emit("listen", cookies.botSession)
   if (data?.registered && typeof window !== "undefined")
-    window.location.href = `https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=8&response_type=code&redirect_uri=http://localhost:3000/redirects/close?mode=bot&guild_id=${id}&disable_guild_select=true`
+    window.location.href = `https://discord.com/oauth2/authorize?client_id=${clientID}&scope=bot&permissions=8&response_type=code&redirect_uri=${redirectUrl}/redirects/close?mode=bot&guild_id=${id}&disable_guild_select=true`
 
   return <>
     <h1>{data?.data}</h1>
