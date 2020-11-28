@@ -64,8 +64,8 @@ const Guild = () => {
 
   const Component = ModeComponents[mode as Mode]
   return <>
-    <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>}>
-      {<Component data={infoResp}/>}
+    <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
+      {<Component data={infoResp as any}/>}
     </Layout>
   </>
 }
@@ -83,9 +83,35 @@ export interface GuildInterface {
   leaveMSG: string,
   welcomeChannel: string,
   privateChannel: string,
-  disableDetailedLogging: string,
-  levelUpChannel: string
+  disableDetailedLogging: boolean,
+  levelUpChannel: string,
+  channels: DiscordChannel[]
 }
+
+export interface DiscordChannel {
+  id:                    string;
+  type:                  number;
+  name:                  string;
+  position:              number;
+  parent_id:             null | string;
+  guild_id:              string;
+  permission_overwrites: PermissionOverwrite[];
+  nsfw:                  boolean;
+  last_message_id?:      null | string;
+  last_pin_timestamp?:   string;
+  topic?:                null;
+  rate_limit_per_user?:  number;
+  bitrate?:              number;
+  user_limit?:           number;
+}
+
+export interface PermissionOverwrite {
+  id:    string;
+  type:  number;
+  allow: string;
+  deny:  string;
+}
+
 
 export enum Mode {
   Basic = "basic",

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { parseCookies, setCookie } from 'nookies';
-import React, { ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 import hat from "hat"
 import Nav from "./Nav";
 const rack = hat.rack();
@@ -8,10 +8,11 @@ const rack = hat.rack();
 type Props = {
   children?: ReactNode
   title?: string,
-  nav?: JSX.Element
+  nav?: JSX.Element,
+  style?: CSSProperties
 }
 
-const Layout = ({ children, title = 'Title not given.', nav: customNav }: Props) => {
+const Layout = ({ children, title = 'Title not given.', nav: customNav, style = {} }: Props) => {
   const cookie = parseCookies();
 
   if (!cookie?.websocketSession)
@@ -42,7 +43,7 @@ const Layout = ({ children, title = 'Title not given.', nav: customNav }: Props)
     <div id={"content-wrapper"}>
       {Cnav}
 
-      <div id={"page-container"} className={"center"} key={hat()}>
+      <div id={"page-container"} className={"center"} key={hat()} style={style}>
         {children}
       </div>
 

@@ -103,11 +103,8 @@ footer {
 .center {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.center > * {
-  margin: auto;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .discordGradient_svg__discordText {
