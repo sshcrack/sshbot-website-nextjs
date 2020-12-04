@@ -1,11 +1,11 @@
-import Head from 'next/head';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import Select, { Theme } from "react-select";
 import Switch from 'react-switch';
-import Swal from 'sweetalert2'
 import ModeProps from 'utils/modeProps';
 import { isNull } from 'utils/tools';
+import Question from "../../assets/svg/question.svg";
 import styles from "../../styles/basic.module.scss";
+import { Help } from './Help/Help';
 
 
 export const Basic = ({ data }: ModeProps) => {
@@ -34,53 +34,63 @@ export const Basic = ({ data }: ModeProps) => {
   const levelUp = options.find(s => data.levelUpChannel === s.value) ?? options[0];
   const privChannel = options.find(s => data.privateChannel === s.value) ?? options[0];
   return <>
-    <Head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" />
-    </Head>
     <div className={styles.setting}>
-      <span>Detailed Logging</span>
+      <div className={styles.text}>
+        <span>Detailed Logging</span>
+        <HelpSVG onClick={() => Help.defaultLogging()} />
+      </div>
       <div className={styles.subSetting}>
-        <Switch onChange={setDetailedLogging} checked={detailedLogging ?? false} />
+        <div style={{ display: "flex", justifyContent: "center"}}>
+          <Switch onChange={setDetailedLogging} checked={detailedLogging ?? false} />
+        </div>
       </div>
     </div>
     <div className={styles.setting}>
-      <span>Level Up Channel</span>
-      <div className={styles.subSetting}>
+      <div className={styles.text}>
+        <span>LevelUp Channel</span>
+        <HelpSVG onClick={() => Help.levelUpChannel()} />
+      </div>
+      <div className={`${styles.subSetting} ${styles.overflowAuto}`}>
         <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={levelUp} />
       </div>
     </div>
     <div className={styles.setting}>
-      <span>Private Channel</span>
+      <div className={styles.text}>
+        <span>Private Channels</span>
+        <HelpSVG onClick={() => Help.privateChannels()} />
+      </div>
       <div className={styles.subSetting}>
         <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={privChannel} />
       </div>
     </div>
     <div className={styles.setting}>
-      <span>Welcome Channel</span>
+      <div className={styles.text}>
+        <span>Welcome Channel</span>
+        <HelpSVG onClick={() => Help.welcomeChannel()} />
+      </div>
       <div className={styles.subSetting}>
         <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={welcome} />
       </div>
     </div>
     <div className={styles.setting}>
-      <span>Join Message</span>
-      <div className={styles.subSetting}>
+      <div className={styles.text}>
+        <span>Join Message</span>
+        <HelpSVG onClick={() => Help.joinMessage()} />
+      </div>
+      <div className={`${styles.subSetting} ${styles.noOverflow}`}>
         <Switch onChange={setJoinEnabled} checked={joinEnabled}></Switch>
-        <button onClick={() => {
-          Swal.fire({
-            title: "Test title",
-            text: "Lol haha alert",
-            icon: "info"
-        })}}>
-          Open
-        </button>
-        <input placeholder={"Leave Message"} type={"text"} value={joinMSG} className={`${styles.inputAnimated} ${joinEnabled ? styles.activeInput : ""}`} onChange={s => setJoinMSG(s.target.value)}/>
+
+        <input placeholder={"Leave Message"} type={"text"} value={joinMSG} className={`${styles.inputAnimated} ${joinEnabled ? styles.activeInput : ""}`} onChange={s => setJoinMSG(s.target.value)} />
       </div>
     </div>
     <div className={styles.setting}>
-      <span>Leave Message</span>
-      <div className={styles.subSetting}>
+      <div className={styles.text}>
+        <span>Leave Message</span>
+        <HelpSVG onClick={() => Help.leaveMessage()} />
+      </div>
+      <div className={`${styles.subSetting} ${styles.noOverflow}`}>
         <Switch onChange={setLeaveEnabled} checked={leaveEnabled}></Switch>
-        <input placeholder={"Leave Message"} type={"text"} value={leaveMSG} className={`${styles.inputAnimated} ${leaveEnabled ? styles.activeInput : ""}`} onChange={s => setLeaveMSG(s.target.value)}/>
+        <input placeholder={"Leave Message"} type={"text"} value={leaveMSG} className={`${styles.inputAnimated} ${leaveEnabled ? styles.activeInput : ""}`} onChange={s => setLeaveMSG(s.target.value)} />
       </div>
     </div>
   </>
@@ -120,6 +130,12 @@ const customStyles = {
     }
   }
 }
+
+const HelpSVG = (props: { onClick: (event: MouseEvent<HTMLElement>) => void }) => (
+  <div className={styles.help} onClick={props.onClick}>
+    <Question />
+  </div>
+)
 
 interface SelectInterface {
   value: string | undefined,

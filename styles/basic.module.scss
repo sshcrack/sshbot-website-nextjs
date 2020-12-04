@@ -5,7 +5,6 @@
     justify-content: space-evenly;
     align-items: center;
     margin-top: 0;
-    overflow: hidden;
     width: 100%;
 
     > * {
@@ -25,16 +24,31 @@
 }
 
 .setting {
-    width: 30%;
+    width: 35%;
     margin-top: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+.text {
+    width: 50%;
+    margin-right: 1.5em;
+    grid-template-columns: 4fr 1fr;
+    display: grid;
+}
 
-    span {
-        width: 50%;
-        margin-right: auto
+.help {
+    cursor: pointer;
+    transition: all 0.125s ease-in-out;
+
+    svg {
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+    &:hover {
+        color: var(--dashboardPrimary);
     }
 }
 
@@ -47,4 +61,8 @@
 .activeInput {
     transform: translateX(0%);
     flex-grow: 1.9;
+}
+
+.noOverflow {
+    overflow: hidden;
 }
