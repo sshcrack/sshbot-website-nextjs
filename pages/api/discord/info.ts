@@ -8,7 +8,7 @@ import { getSession } from 'next-auth/client';
 import { checkToken } from 'utils/serverTools';
 import { isNull, RejectType } from 'utils/tools';
 
-
+const { BOT_URI } = process.env
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const conn = await initializeDatabase(hat());
 
@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const mode = (req.query.mode as string) || "basic"
 
-  const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+  const resultBot = await fetch(`${BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
   const guild = await resultBot.json()
 
   res.send(guild)

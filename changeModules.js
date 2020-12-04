@@ -1,5 +1,13 @@
 /* eslint-disable prettier/prettier */
 const replace = require('replace');
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+
+const files = glob.sync('utils/sweetDark/**/*')
+files.forEach(f => {
+  fs.copyFileSync(f, `node_modules/sweetalert2/dist/${  path.basename(f)}`)
+})
 
 replace({
   regex:

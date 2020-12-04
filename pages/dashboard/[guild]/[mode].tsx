@@ -4,6 +4,7 @@ import { Alerts } from 'components/Modes/Alerts'
 import { Basic } from 'components/Modes/Basic'
 import { Miscellaneous } from 'components/Modes/Miscellaneous'
 import { Moderation } from 'components/Modes/Moderation'
+import { TharButton } from 'components/TharButton'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Loader from 'react-loader-spinner'
@@ -58,6 +59,7 @@ const Guild = () => {
     return <Layout title="Settings | sshbot">
       <h1>ERROR</h1>
       <span>{JSON.stringify(infoResp.error)}</span>
+      <TharButton color="white" anim="green" width={"100px"} height={"50px"} onClick={() => {window?.history?.back()}}>Back</TharButton>
     </Layout>
   }
 
