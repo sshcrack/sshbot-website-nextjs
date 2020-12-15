@@ -21,7 +21,7 @@ export const Miscellaneous = ({ data }: ModeProps) => {
 
     <div className={styles.setting}>
       <div className={styles.text}>
-        <span>Detailed Logging</span>
+          <span>Detailed Logging</span>
         <HelpSVG onClick={() => Help.defaultLogging()} />
       </div>
       <div className={styles.subSetting}>

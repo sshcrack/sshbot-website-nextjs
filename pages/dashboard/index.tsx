@@ -43,7 +43,7 @@ const Dashboard = () => {
     return <h1>Redirecting</h1>
   }
 
-  if (response.error || (response as any).message) {
+  if (response.error || response.message) {
     console.log("Error", response.error);
     if (typeof response.error === "object") {
       return <Layout title="Overview | sshbot" key="Error">
@@ -121,6 +121,7 @@ export function isAdmin(permCode: number) {
 }
 
 export interface ResponseInterface {
+  message: string | undefined
   permLevels: { [key: string]: PermLevels },
   guilds: DiscordGuilds[],
   error: undefined | string,
