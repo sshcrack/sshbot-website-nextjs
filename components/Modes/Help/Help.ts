@@ -62,5 +62,24 @@ export class Help {
       icon: "info"
     })
   }
+
+  static welcomeImage() {
+    Swal.fire({
+      html: `
+      <p>Weather the bot should send an welcome image</p>
+      <img src="https://i.imgur.com/RXQzsTh.png" alt="Welcome Image Example" style="width: 100%;">
+      `,
+      icon: "info"
+    })
+  }
+
+  static prefixMessage() {
+    Swal.fire({
+      html: `
+      <p>The prefix of the bot. (The symbol sequence in front of commands)</p>
+      `,
+      icon: "info"
+    })
+  }
 }
 

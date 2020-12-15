@@ -84,9 +84,11 @@ export interface GuildInterface {
   joinMSG: string,
   leaveMSG: string,
   welcomeChannel: string,
+  welcomeImage: boolean,
   privateChannel: string,
   disableDetailedLogging: boolean,
   levelUpChannel: string,
+  prefix: string,
   channels: DiscordChannel[]
 }
 

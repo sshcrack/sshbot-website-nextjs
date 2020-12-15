@@ -43,8 +43,18 @@ const Dashboard = () => {
     return <h1>Redirecting</h1>
   }
 
-  if (response.error) {
-    if (response.error.includes("unexpected character")) {
+  if (response.error || (response as any).message) {
+    console.log("Error", response.error);
+    if (typeof response.error === "object") {
+      return <Layout title="Overview | sshbot" key="Error">
+        <h1>ERROR</h1>
+        <p>
+          {(response.error as any).message}
+        </p>
+        <p>Try signing out and logging back in.</p>
+      </Layout>
+    }
+    if (response.error?.includes("unexpected character")) {
       return <Layout title="Overview | sshbot" key="Error">
         <h1>ERROR</h1>
         <span>

@@ -1,15 +1,16 @@
-import { MouseEvent, useState } from 'react';
+import { SavePopup } from 'components/SavePopup';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Select, { Theme } from "react-select";
 import Switch from 'react-switch';
 import ModeProps from 'utils/modeProps';
 import { isNull } from 'utils/tools';
-import Question from "../../assets/svg/question.svg";
-import styles from "../../styles/basic.module.scss";
+import { HelpSVG } from 'utils/tsxUtils';
+import styles from "../../styles/mode.module.scss";
 import { Help } from './Help/Help';
 
 
 export const Basic = ({ data }: ModeProps) => {
-  const [detailedLogging, setDetailedLogging] = useState<boolean | undefined>(undefined);
+  const [welcomeImage, setWelcomeImage] = useState<boolean | undefined>(undefined);
   const [leaveEnabled, setLeaveEnabled] = useState<boolean>(!isNull(data.leaveMSG));
   const [leaveMSG, setLeaveMSG] = useState<string>(data.leaveMSG);
 
@@ -17,8 +18,6 @@ export const Basic = ({ data }: ModeProps) => {
   const [joinMSG, setJoinMSG] = useState<string>(data.joinMSG);
   var options: SelectInterface[] = [];
   if (!isNull(data)) {
-    if (isNull(detailedLogging))
-      setDetailedLogging(!data.disableDetailedLogging);
     options = data.channels.map(value => {
       return {
         value: value.id,
@@ -34,17 +33,6 @@ export const Basic = ({ data }: ModeProps) => {
   const levelUp = options.find(s => data.levelUpChannel === s.value) ?? options[0];
   const privChannel = options.find(s => data.privateChannel === s.value) ?? options[0];
   return <>
-    <div className={styles.setting}>
-      <div className={styles.text}>
-        <span>Detailed Logging</span>
-        <HelpSVG onClick={() => Help.defaultLogging()} />
-      </div>
-      <div className={styles.subSetting}>
-        <div style={{ display: "flex", justifyContent: "center"}}>
-          <Switch onChange={setDetailedLogging} checked={detailedLogging ?? false} />
-        </div>
-      </div>
-    </div>
     <div className={styles.setting}>
       <div className={styles.text}>
         <span>LevelUp Channel</span>
@@ -63,36 +51,26 @@ export const Basic = ({ data }: ModeProps) => {
         <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={privChannel} />
       </div>
     </div>
-    <div className={styles.setting}>
-      <div className={styles.text}>
-        <span>Welcome Channel</span>
-        <HelpSVG onClick={() => Help.welcomeChannel()} />
-      </div>
-      <div className={styles.subSetting}>
-        <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={welcome} />
-      </div>
-    </div>
-    <div className={styles.setting}>
-      <div className={styles.text}>
-        <span>Join Message</span>
-        <HelpSVG onClick={() => Help.joinMessage()} />
-      </div>
-      <div className={`${styles.subSetting} ${styles.noOverflow}`}>
-        <Switch onChange={setJoinEnabled} checked={joinEnabled}></Switch>
 
-        <input placeholder={"Leave Message"} type={"text"} value={joinMSG} className={`${styles.inputAnimated} ${joinEnabled ? styles.activeInput : ""}`} onChange={s => setJoinMSG(s.target.value)} />
-      </div>
-    </div>
-    <div className={styles.setting}>
-      <div className={styles.text}>
-        <span>Leave Message</span>
-        <HelpSVG onClick={() => Help.leaveMessage()} />
-      </div>
-      <div className={`${styles.subSetting} ${styles.noOverflow}`}>
-        <Switch onChange={setLeaveEnabled} checked={leaveEnabled}></Switch>
-        <input placeholder={"Leave Message"} type={"text"} value={leaveMSG} className={`${styles.inputAnimated} ${leaveEnabled ? styles.activeInput : ""}`} onChange={s => setLeaveMSG(s.target.value)} />
-      </div>
-    </div>
+    <WelcomeSettings
+      options={options}
+      default={welcome}
+
+      welcomeImage={welcomeImage}
+      setWelcomeImage={setWelcomeImage}
+
+      joinMSG={joinMSG}
+      setJoinMSG={setJoinMSG}
+
+      joinEnabled={joinEnabled}
+      setJoinEnabled={setJoinEnabled}
+
+      leaveEnabled={leaveEnabled}
+      setLeaveEnabled={setLeaveEnabled}
+
+      leaveMSG={leaveMSG}
+      setLeaveMSG={setLeaveMSG}
+    />
   </>
 }
 
@@ -131,11 +109,72 @@ const customStyles = {
   }
 }
 
-const HelpSVG = (props: { onClick: (event: MouseEvent<HTMLElement>) => void }) => (
-  <div className={styles.help} onClick={props.onClick}>
-    <Question />
-  </div>
-)
+const WelcomeSettings = (props: {
+  options: SelectInterface[],
+  default: SelectInterface,
+  setWelcomeImage: Dispatch<SetStateAction<boolean | undefined>>,
+  welcomeImage: boolean | undefined,
+
+  joinMSG: string,
+  joinEnabled: boolean | undefined,
+  setJoinMSG: Dispatch<SetStateAction<string>>,
+  setJoinEnabled: Dispatch<SetStateAction<boolean>>,
+
+  leaveMSG: string,
+  leaveEnabled: boolean | undefined,
+  setLeaveEnabled: Dispatch<SetStateAction<boolean>>,
+  setLeaveMSG: Dispatch<SetStateAction<string>>,
+}) => (
+    <>
+      <h2 className={styles.spaceTop}>Welcome</h2>
+
+      <div className={styles.setting}>
+        <div className={styles.text}>
+          <span>Welcome Image</span>
+          <HelpSVG onClick={() => Help.welcomeImage()} />
+        </div>
+        <div className={styles.subSetting}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Switch onChange={props.setWelcomeImage} checked={props.welcomeImage ?? false} />
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.setting}>
+        <div className={styles.text}>
+          <span>Welcome Channel</span>
+          <HelpSVG onClick={() => Help.welcomeChannel()} />
+        </div>
+        <div className={styles.subSetting}>
+          <Select options={props.options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={props.default} />
+        </div>
+      </div>
+
+      <div className={styles.setting}>
+        <div className={styles.text}>
+          <span>Join Message</span>
+          <HelpSVG onClick={() => Help.joinMessage()} />
+        </div>
+        <div className={`${styles.subSetting} ${styles.noOverflow}`}>
+          <Switch onChange={props.setJoinEnabled} checked={props.joinEnabled ?? false}></Switch>
+
+          <input placeholder={"Leave Message"} type={"text"} value={props.joinMSG} className={`${styles.inputAnimated} ${props.joinEnabled ? styles.activeInput : ""}`} onChange={s => props.setJoinMSG(s.target.value)} />
+        </div>
+      </div>
+      <div className={styles.setting}>
+        <div className={styles.text}>
+          <span>Leave Message</span>
+          <HelpSVG onClick={() => Help.leaveMessage()} />
+        </div>
+        <div className={`${styles.subSetting} ${styles.noOverflow}`}>
+          <Switch onChange={props.setLeaveEnabled} checked={props.leaveEnabled ?? false}></Switch>
+          <input placeholder={"Leave Message"} type={"text"} value={props.leaveMSG} className={`${styles.inputAnimated} ${props.leaveEnabled ? styles.activeInput : ""}`} onChange={s => props.setLeaveMSG(s.target.value)} />
+        </div>
+      </div>
+
+      <SavePopup onSave={() => console.log("save")} onCancel={() => console.log("Cancel")}/>
+    </>
+  )
 
 interface SelectInterface {
   value: string | undefined,
