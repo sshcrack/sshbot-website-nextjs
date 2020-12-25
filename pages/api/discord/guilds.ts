@@ -7,9 +7,14 @@ import { isNull, RejectType } from 'utils/tools';
 import fetch from "node-fetch"
 import hat from "hat"
 import { checkToken } from 'utils/serverTools';
+import rateLimit from 'utils/rateLimit';
 
-
+const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  const rateLimited = await limiter.check(res, 10, "CACHE_TOKEN")
+  if(rateLimited) return res.send(rateLimited);
+  
   const conn = await initializeDatabase(hat());
 
   const session = await getSession({ req }) as Session;

@@ -67,12 +67,13 @@ const Dashboard = () => {
   if (response.error || response.status !== HTTPStatusCodes.OK) {
     return <Layout title="Overview | sshbot" key="Error">
       <h1>ERROR</h1>
-      <span>
+      <p>
         {JSON.stringify(response.error)}
-
+      </p>
+      <p>
         Trying to resolve your problem...
         If this problem persists, please contact the developers!
-        </span>
+      </p>
       <TharButton color="white" anim="red" width={"200px"} height={"100px"}><span onClick={() => signOut().then(() => location.pathname = "/loggedOut")}>Sign out</span></TharButton>
     </Layout>
   }

@@ -7,8 +7,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 import { checkToken } from 'utils/serverTools';
 import { isNull, RejectType } from 'utils/tools';
+import rateLimit from 'utils/rateLimit';
 
+const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  const rateLimited = await limiter.check(res, 10, "CACHE_TOKEN")
+  if(rateLimited) return res.send(rateLimited);
   const conn = await initializeDatabase(hat());
 
   const session = await getSession({ req });

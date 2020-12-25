@@ -1,8 +1,30 @@
 .savePopup {
-    width: 98.5vw;
+    width: 60vw;
     height: 4rem;
     bottom: 2rem;
     background: var(--darkerBackground);
     border-radius: 5px;
     position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 125%;
+}
+
+.saveButton {
+    width: 10em;
+    height: 2.5em;
+    
+    border-radius: 4px;
+    margin-left: 10em;
+
+    font-size: 75%;
+    color: var(--primary-font-color);
+    background: var(--buttonBackground);
+    transition: all 0.1s ease-in-out;
+}
+
+.saveButton:hover {
+    background: var(--buttonHoverBackground);
 }

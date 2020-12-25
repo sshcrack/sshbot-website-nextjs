@@ -11,10 +11,13 @@
     "buildStart": "npm run build && npm start"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^10.0.3",
     "@svgr/webpack": "^5.5.0",
     "@sweetalert2/theme-dark": "^4.0.1",
     "@types/animejs": "^3.1.2",
     "@types/hat": "0.0.1",
+    "@types/lru-cache": "^5.1.0",
+    "@types/math-expression-evaluator": "^1.2.0",
     "@types/node-fetch": "^2.5.7",
     "@types/react-loader-spinner": "^3.1.2",
     "@types/react-select": "^3.0.26",
@@ -29,6 +32,8 @@
     "glob": "^7.1.6",
     "hat": "0.0.3",
     "helmet": "^4.1.1",
+    "lru-cache": "^6.0.0",
+    "math-expression-evaluator": "^1.3.6",
     "moment": "^2.29.1",
     "next": "^10.0.3",
     "next-auth": "github:sshcrack/next-auth",
