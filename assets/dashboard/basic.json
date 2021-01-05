@@ -1,0 +1,15 @@
+{
+  "fetch": "eval$`/api/discord/info?id=${guild}`",
+  "items": [
+    {
+      "type": "switch",
+      "default": "path$welcomeImage",
+      "saveID": "welcomeImage",
+      "label": "Welcome Image",
+      "help": {
+        "image": "https://i.imgur.com/RXQzsTh.png",
+        "text": "Weather the bot should send an welcome image"
+      }
+    }
+  ]
+}

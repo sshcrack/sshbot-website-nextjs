@@ -1,3 +1,4 @@
+import BuildPage from 'components/BuildPage'
 import DashNav from 'components/DashNav'
 import Layout from 'components/Layout'
 import { Alerts } from 'components/Modes/Alerts'
@@ -64,10 +65,11 @@ const Guild = () => {
   }
 
 
-  const Component = ModeComponents[mode as Mode]
+  //const Component = ModeComponents[mode as Mode]
   return <>
     <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
-      {<Component data={infoResp as any}/>}
+      {/*<Component data={infoResp as any}/>*/}
+      <BuildPage mode={mode as string} guild={guild as string} />
     </Layout>
   </>
 }
