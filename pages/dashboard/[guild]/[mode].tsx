@@ -1,10 +1,6 @@
 import BuildPage from 'components/BuildPage'
 import DashNav from 'components/DashNav'
 import Layout from 'components/Layout'
-import { Alerts } from 'components/Modes/Alerts'
-import { Basic } from 'components/Modes/Basic'
-import { Miscellaneous } from 'components/Modes/Miscellaneous'
-import { Moderation } from 'components/Modes/Moderation'
 import { TharButton } from 'components/TharButton'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -65,10 +61,8 @@ const Guild = () => {
   }
 
 
-  //const Component = ModeComponents[mode as Mode]
   return <>
     <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
-      {/*<Component data={infoResp as any}/>*/}
       {<BuildPage mode={mode as string} guild={guild as string} />}
     </Layout>
   </>
@@ -124,11 +118,4 @@ export enum Mode {
   Moderation = "moderation",
   Alerts = "alerts",
   Miscellaneous = "miscellaneous"
-}
-
-export const ModeComponents = {
-  basic: Basic,
-  moderation: Moderation,
-  alerts: Alerts,
-  miscellaneous: Miscellaneous
 }
