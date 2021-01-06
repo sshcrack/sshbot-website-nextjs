@@ -10,6 +10,27 @@
         "image": "https://i.imgur.com/RXQzsTh.png",
         "text": "Weather the bot should send an welcome image"
       }
+    },
+    {
+      "type": "text_toggle",
+      "default": "path$joinMSG",
+      "saveID": "joinMSG",
+      "label": "JoinMSG",
+      "placeholder": "Join Message",
+      "help": {
+        "html": "<p>Message, which should be send, when users join.</p><p>Variables are {{user}}, {{guildname}} and {{membercount}}</p>"
+      }
+    },
+    {
+      "type": "select",
+      "itemValues": "eval$data?.channels?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.map(v => v.name)",
+      "default": "path$welcomeChannel",
+      "saveID": "welcomeChannel",
+      "label": "Welcome Channel",
+      "help": {
+        "html": "<p>Message, which should be send, when users leave.</p><p>Variables are {{user}}, {{guildname}} and {{membercount}}</p>"
+      }
     }
   ]
 }

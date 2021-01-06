@@ -69,7 +69,7 @@ const Guild = () => {
   return <>
     <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
       {/*<Component data={infoResp as any}/>*/}
-      <BuildPage mode={mode as string} guild={guild as string} />
+      {<BuildPage mode={mode as string} guild={guild as string} />}
     </Layout>
   </>
 }
