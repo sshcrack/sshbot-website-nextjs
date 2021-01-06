@@ -1,5 +1,5 @@
 {
   "items": [
-    
-  ]
+  ],
+  "fetch": "eval$`/api/discord/info?id=${guild}`"
 }

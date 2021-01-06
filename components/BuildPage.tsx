@@ -23,7 +23,6 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
     if (userData[key] === "")
       delete difference[key];
   });
-  console.log(difference)
 
   const files = {
     basic: basicJSON,
@@ -142,6 +141,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
           value: itemValues[i]
         })
       });
+      options.unshift({ value: "", label: "Disabled" })
 
       if (isNull(textToggle[saveID])) {
         textToggle[saveID] = {
@@ -175,11 +175,18 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
             <span key={`${saveID}-HelpLabel`}>{label}</span>
             {isNull(item.help) ? <></> : <HelpSVG onClick={() => fireHelp()} />}
           </div>
-          <div className={`${styles.subSetting} ${styles.noOverflow}`} key={`${saveID}-SubSetting`}>
+          <div className={styles.subSetting} key={`${saveID}-SubSetting`}>
             {generatedSelect}
           </div>
         </div>
       );
+    }
+
+    if (anyItem.type === "title") {
+      const item: TitleStruct = anyItem as any
+      Components.push(
+        <h2 className={styles.spaceTop}>{item.text}</h2>
+      )
     }
   });
 
@@ -192,7 +199,8 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
 
 function processString(str: string, data: any, guild: string) {
   guild = guild;
-  if (!str.startsWith("path$") && !str.startsWith("eval$")) return str;
+  if (isNull(str)) return str;
+  if (!str?.startsWith("path$") && !str?.startsWith("eval$")) return str;
 
   if (str.startsWith("path$")) {
     if (isNull(data)) return undefined;
@@ -248,6 +256,11 @@ export interface HelpInterface {
   html?: string
 }
 
+export interface TitleStruct {
+  type: string,
+  text: string
+}
+
 const generateSwitch = (defaultValue: boolean, userData: any, setUserData: Dispatch<any>, saveID: string) => (
   <Switch key={`${saveID}-Switch`} onChange={(current) => { userData[saveID] = current; setUserData(userData) }} checked={defaultValue} />
 )
@@ -257,7 +270,7 @@ const generateTextToggle = (defaultValue: string, placeholder: string, textToggl
     <Switch key={`${saveID}-Switch`} onChange={v => { textToggle[saveID].enabled = v; setTextToggle(textToggle); }} checked={textToggle[saveID].enabled}></Switch>
     <input
       key={`${saveID}-Input`}
-      placeholder={"Leave Message"}
+      placeholder={placeholder}
       value={textToggle[saveID].value ?? defaultValue ?? ""}
       onChange={s => { textToggle[saveID].value = s.target.value; setTextToggle(textToggle) }}
 
