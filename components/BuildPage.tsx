@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 import { HelpSVG } from 'utils/tsxUtils';
 import { SavePopup } from './SavePopup';
 import Select, { Theme, ValueType } from "react-select"
+import { VM } from "vm2"
+const vm = new VM();
 
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
@@ -162,7 +164,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
           ` : item.help?.html
         })
       }
-      const generatedSelect = generateSelect(options, defaultValue ?? options[options.length -1], d => {
+      const generatedSelect = generateSelect(options, defaultValue ?? options[options.length - 1], d => {
         userData[saveID] = d;
         setUserData(userData);
         setUpdate(!update);
@@ -209,7 +211,7 @@ function processString(str: string, data: any, guild: string) {
 
   if (str.startsWith("eval$")) {
     const toEval = str.substr("eval$".length);
-    return eval(toEval);
+    return vm.run(`let guild='${guild}';let data = JSON.parse(${JSON.stringify(data)}) ${toEval}`);
   }
 }
 

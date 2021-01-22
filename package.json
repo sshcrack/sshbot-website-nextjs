@@ -62,6 +62,7 @@
     "superagent": "^6.1.0",
     "sweetalert2": "^10.13.0",
     "typeorm": "^0.2.30",
+    "vm2": "^3.9.2",
     "webpack-bundle-analyzer": "^4.4.0"
   },
   "devDependencies": {
