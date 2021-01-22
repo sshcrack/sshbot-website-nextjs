@@ -191,11 +191,18 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   });
 
 
+  const filtered = Object.keys(difference).filter(key => difference[key])
   return <>
     {Components}
-    {<SavePopup onSave={() => { }} enabled={Object.keys(difference).length !== 0} />}
+    {<SavePopup onSave={() => saveData(guild, userData, setLoading)} enabled={Object.keys(filtered).length !== 0} />}
   </>
 };
+
+function saveData(guild: string, userData: any, setLoading: Dispatch<boolean>) {
+  fetch(`/api/discord/save?id=${guild}`, { method: "POST", body: JSON.stringify(userData), headers: { "Content-Type": "application/json" } }).then(() => {
+    setLoading(false)
+  })
+}
 
 function processString(str: string, data: any, guild: string) {
   guild = guild;
