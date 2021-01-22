@@ -11,7 +11,6 @@ import { isNull, RejectType } from 'utils/tools';
 import rateLimit from 'utils/rateLimit';
 import dotenv from "dotenv"
 dotenv.config()
-console.log("Env", process.env, "BOT", process.env.BOT_URI)
 
 const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -36,7 +35,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     else return res.status(500).send({ error: "Internal Server Error" });
 
   const mode = (req.query.mode as string) || "basic"
-  console.log("Fetch", `${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
   const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
   const guild = await resultBot.json()
 

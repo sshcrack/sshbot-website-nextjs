@@ -1,29 +1,44 @@
-import styles from "../styles/savePopup.module.scss";
 import anime from "animejs";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import styles from "../styles/savePopup.module.scss";
 
-export const SavePopup = (_props: { onSave: () => void }) => {
-  const [didLoad, setDidLoad] = useState<boolean>(false);
-  useEffect(() => {
-    if (!didLoad) {
-      handleLoad();
-      setDidLoad(true);
-    }
-  })
+const disabledBottom = "-5rem";
+const enabledBottom = "2rem";
+
+export const SavePopup = (props: { onSave: () => void, enabled: boolean }) => {
+  const [previous, setPrevious] = useState<boolean>(false);
+
+  if (!previous && props.enabled)
+    handleEnable()
+
+  if (previous && !props.enabled)
+    handleDisable()
+
+  if (previous !== props.enabled)
+    setPrevious(props.enabled);
 
   return <>
-    <div className={styles.savePopup}>
+    <div className={styles.savePopup} style={{bottom: props.enabled ? enabledBottom : disabledBottom}}>
       <span>You have unsaved changes</span>
-      <button className={styles.saveButton} onClick={() => _props.onSave()}>Save Changes</button>
+      <button className={styles.saveButton} onClick={() => props.onSave()}>Save Changes</button>
     </div>
   </>
 };
 
-function handleLoad() {
+function handleEnable() {
   anime({
     targets: `div.${styles.savePopup}`,
     autoplay: true,
-    bottom: "2rem",
+    bottom: enabledBottom,
+    easing: "easeOutElastic"
+  })
+};
+
+function handleDisable() {
+  anime({
+    targets: `div.${styles.savePopup}`,
+    autoplay: true,
+    bottom: disabledBottom,
     easing: "easeOutElastic"
   })
 };

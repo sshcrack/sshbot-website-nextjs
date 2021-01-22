@@ -162,8 +162,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
           ` : item.help?.html
         })
       }
-      const generatedSelect = generateSelect(options, defaultValue, d => {
-        console.log(d);
+      const generatedSelect = generateSelect(options, defaultValue ?? options[options.length -1], d => {
         userData[saveID] = d;
         setUserData(userData);
         setUpdate(!update);
@@ -185,7 +184,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
     if (anyItem.type === "title") {
       const item: TitleStruct = anyItem as any
       Components.push(
-        <h2 className={styles.spaceTop}>{item.text}</h2>
+        <h2 className={styles.spaceTop} key={"title-" + item.text}>{item.text}</h2>
       )
     }
   });
@@ -193,7 +192,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
 
   return <>
     {Components}
-    {Object.keys(difference).length !== 0 ? <SavePopup onSave={() => { }} /> : <></>}
+    {<SavePopup onSave={() => { }} enabled={Object.keys(difference).length !== 0} />}
   </>
 };
 
@@ -286,11 +285,11 @@ const generateTextToggle = (defaultValue: string, placeholder: string, textToggl
 
 
 
-const generateSelect = (options: SelectInterface[], defaultValue: SelectInterface, setChange: (newValue: ValueType<SelectInterface, false>) => void) => (
-  <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={defaultValue} onChange={newValue => {
+const generateSelect = (options: SelectInterface[], defaultValue: SelectInterface, setChange: (newValue: ValueType<SelectInterface, false>) => void) => {
+  return <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={defaultValue} onChange={newValue => {
     setChange(newValue)
-  } } />
-)
+  }} />
+}
 
 function styleFn(theme: Theme) {
   const color = "var(--roleSelect)"

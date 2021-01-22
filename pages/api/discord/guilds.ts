@@ -47,8 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const inGuilds = discordObj as DiscordGuilds[];
 
   const toFetch = `${process.env.BOT_URI}/permLevels?${inGuilds.map(value => `check[]=${value.id}`).join("&")}&member=${dbAcc?.provider_account_id}`
-  console.log(toFetch)
-  let permLevels;  
+  let permLevels;
   try {
      permLevels = await (await fetch(toFetch)).json()
   } catch (e) {
