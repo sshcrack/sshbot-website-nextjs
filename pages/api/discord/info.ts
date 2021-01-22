@@ -12,7 +12,6 @@ import rateLimit from 'utils/rateLimit';
 import dotenv from "dotenv"
 dotenv.config()
 console.log("Env", process.env, "BOT", process.env.BOT_URI)
-const { BOT_URI } = process.env
 
 const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
