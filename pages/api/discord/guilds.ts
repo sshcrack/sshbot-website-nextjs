@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const rateLimited = await limiter.check(res, 10, "CACHE_TOKEN")
   if(rateLimited) return res.send(rateLimited);
-  
+
   const conn = await initializeDatabase(hat());
 
   const session = await getSession({ req }) as Session;
