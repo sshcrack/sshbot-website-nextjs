@@ -11,8 +11,7 @@ import Swal from "sweetalert2";
 import { HelpSVG } from 'utils/tsxUtils';
 import { SavePopup } from './SavePopup';
 import Select, { Theme, ValueType } from "react-select"
-import { VM } from "vm2"
-const vm = new VM();
+import vm from "vm"
 
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
@@ -211,7 +210,7 @@ function processString(str: string, data: any, guild: string) {
 
   if (str.startsWith("eval$")) {
     const toEval = str.substr("eval$".length);
-    return vm.run(`let guild='${guild}';let data = JSON.parse(${JSON.stringify(data)}) ${toEval}`);
+    return vm.runInNewContext(toEval, {data: data, guild: guild});
   }
 }
 
