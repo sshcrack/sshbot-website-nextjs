@@ -8,6 +8,8 @@ import fetch from "node-fetch"
 import hat from "hat"
 import { checkToken } from 'utils/serverTools';
 import rateLimit from 'utils/rateLimit';
+import dotenv from "dotenv"
+dotenv.config()
 
 const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -45,8 +47,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const inGuilds = discordObj as DiscordGuilds[];
 
   const toFetch = `${process.env.BOT_URI}/permLevels?${inGuilds.map(value => `check[]=${value.id}`).join("&")}&member=${dbAcc?.provider_account_id}`
-
-  const permLevels = await (await fetch(toFetch)).json()
+  console.log(toFetch)
+  let permLevels;  
+  try {
+     permLevels = await (await fetch(toFetch)).json()
+  } catch (e) {
+     return res.status(500).send({error: "Bot not started."})
+  }
   await conn.close()
 
   res.send({
