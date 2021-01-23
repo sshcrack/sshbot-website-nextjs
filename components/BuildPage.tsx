@@ -16,6 +16,7 @@ import vm from "vm"
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
   const [loading, setLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
   const [userData, setUserData] = useState<any>({});
   const [fetched, setFetched] = useState<any>({});
   const [textToggle, setTextToggle] = useState<TextToggleInt>({});
@@ -191,15 +192,17 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   });
 
 
-  const filtered = Object.keys(difference).filter(key => difference[key])
+  const filtered = Object.keys(difference).filter(key => !isNull(difference[key]))
   return <>
     {Components}
-    {<SavePopup onSave={() => saveData(guild, userData, setLoading)} enabled={Object.keys(filtered).length !== 0} />}
+    {<SavePopup onSave={() => saveData(guild, userData, setLoading, setSaving)} enabled={Object.keys(filtered).length !== 0} saving={saving}/>}
   </>
 };
 
-function saveData(guild: string, userData: any, setLoading: Dispatch<boolean>) {
+function saveData(guild: string, userData: any, setLoading: Dispatch<boolean>, setSaving: Dispatch<boolean>) {
+  setSaving(true)
   fetch(`/api/discord/save?id=${guild}`, { method: "POST", body: JSON.stringify(userData), headers: { "Content-Type": "application/json" } }).then(() => {
+    setSaving(false)
     setLoading(false)
   })
 }
