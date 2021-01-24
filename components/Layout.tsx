@@ -48,7 +48,7 @@ const Layout = ({ children, title = 'Title not given.', nav: customNav, style = 
       </div>
 
       <footer>
-        <span>© 2020 sshbot</span>
+        <span>© 2021 sshbot</span>
       </footer>
     </div>
   </>
