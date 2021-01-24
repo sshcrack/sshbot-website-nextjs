@@ -1,17 +1,20 @@
-import moderationJSON from "assets/dashboard/moderation.json";
-import basicJSON from "assets/dashboard/basic.json";
 import alertsJSON from "assets/dashboard/alerts.json";
+import basicJSON from "assets/dashboard/basic.json";
 import miscJSON from "assets/dashboard/miscellaneous.json";
+import moderationJSON from "assets/dashboard/moderation.json";
+import { useRouter } from 'next/router';
 import objectPath from "object-path";
 import { Dispatch, useEffect, useState } from 'react';
-import Switch from "react-switch"
-import { diff, isNull } from 'utils/tools';
-import styles from "../styles/mode.module.scss";
+import Loader from "react-loader-spinner";
+import Select, { Theme, ValueType } from "react-select";
+import Switch from "react-switch";
 import Swal from "sweetalert2";
+import { diff, isNull } from 'utils/tools';
 import { HelpSVG } from 'utils/tsxUtils';
+import vm from "vm";
+import styles from "../styles/mode.module.scss";
 import { SavePopup } from './SavePopup';
-import Select, { Theme, ValueType } from "react-select"
-import vm from "vm"
+import { TharButton } from './TharButton';
 
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
@@ -20,6 +23,8 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [userData, setUserData] = useState<any>({});
   const [fetched, setFetched] = useState<any>({});
   const [textToggle, setTextToggle] = useState<TextToggleInt>({});
+  const router = useRouter();
+
   let difference = diff(userData, fetched);
   Object.keys(difference).forEach(key => {
     if (userData[key] === "")
@@ -49,6 +54,28 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
       })
     }
   })
+
+
+  if (Object.keys(fetched).length <= 0)
+    return <>
+      <h1>Loading</h1>
+      <Loader type="Bars" color="#00BFFF" height={80} width={80} />
+    </>
+
+  if (typeof fetched === "string") return <h1>{fetched}</h1>
+
+  if (fetched.error === "No session") {
+    router.push("/");
+    return <h1>Redirecting No session</h1>
+  }
+
+  if (!isNull(fetched.error)) {
+    return <>
+      <h1>ERROR</h1>
+      <span>{JSON.stringify(fetched.error)}</span>
+      <TharButton color="white" anim="green" width={"100px"} height={"50px"} onClick={() => { window?.history?.back() }}>Back</TharButton>
+    </>
+  }
 
   items.forEach(anyItem => {
     if (anyItem.type === "switch") {
@@ -88,10 +115,14 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
       const saveID = item.saveID;
       const label = item.label;
 
+      console.log("\n")
+      console.log("text", text)
+      console.log("t", textToggle[saveID])
+      console.log("\n")
       if (isNull(textToggle[saveID])) {
         textToggle[saveID] = {
-          enabled: false,
-          value: ""
+          enabled: isNull(text) ? false : true,
+          value: isNull(text) ? "" : text
         }
         setTextToggle(textToggle);
         setUpdate(!update);
@@ -132,6 +163,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
     if (anyItem.type === "select") {
       const item: SelectStruct = (anyItem as any);
       const defaultValue = processString(item.default, userData, guild);
+      console.log("DefaultValue", defaultValue);
       const saveID = item.saveID;
       const label = item.label;
       const itemLabels: string[] = processString(item.itemLabel, userData, guild) ?? [];
@@ -145,15 +177,6 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
       });
       options.unshift({ value: "", label: "Disabled" })
 
-      if (isNull(textToggle[saveID])) {
-        textToggle[saveID] = {
-          enabled: false,
-          value: ""
-        }
-        setTextToggle(textToggle);
-        setUpdate(!update);
-      }
-
       let fireHelp = () => { }
       if (!isNull(item.help)) {
         fireHelp = () => Swal.fire({
@@ -164,7 +187,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
           ` : item.help?.html
         })
       }
-      const generatedSelect = generateSelect(options, defaultValue ?? options[options.length - 1], d => {
+      const generatedSelect = generateSelect(options, options.find(i => i.value === defaultValue) ?? options[options.length - 1], d => {
         userData[saveID] = d;
         setUserData(userData);
         setUpdate(!update);
@@ -195,7 +218,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const filtered = Object.keys(difference).filter(key => !isNull(difference[key]))
   return <>
     {Components}
-    {<SavePopup onSave={() => saveData(guild, userData, setLoading, setSaving)} enabled={Object.keys(filtered).length !== 0} saving={saving}/>}
+    {<SavePopup onSave={() => saveData(guild, userData, setLoading, setSaving)} enabled={Object.keys(filtered).length !== 0} saving={saving} />}
   </>
 };
 
@@ -220,7 +243,7 @@ function processString(str: string, data: any, guild: string) {
 
   if (str.startsWith("eval$")) {
     const toEval = str.substr("eval$".length);
-    return vm.runInNewContext(toEval, {data: data, guild: guild});
+    return vm.runInNewContext(toEval, { data: data, guild: guild });
   }
 }
 
@@ -281,7 +304,7 @@ const generateTextToggle = (defaultValue: string, placeholder: string, textToggl
     <input
       key={`${saveID}-Input`}
       placeholder={placeholder}
-      value={textToggle[saveID].value ?? defaultValue ?? ""}
+      value={textToggle[saveID].value ?? defaultValue}
       onChange={s => { textToggle[saveID].value = s.target.value; setTextToggle(textToggle) }}
 
       type={"text"}
