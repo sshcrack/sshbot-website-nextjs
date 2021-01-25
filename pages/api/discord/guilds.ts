@@ -46,12 +46,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const inGuilds = discordObj as DiscordGuilds[];
 
-  const toFetch = `${process.env.BOT_URI}/permLevels?${inGuilds.map(value => `check[]=${value.id}`).join("&")}&member=${dbAcc?.provider_account_id}`
+  const toFetch = `${process.env.BOT_URI}/permLevels?member=${dbAcc?.provider_account_id}`
   let permLevels;
   try {
-     permLevels = await (await fetch(toFetch)).json()
+    permLevels = await (await fetch(toFetch, {
+      method: "POST",
+      body: JSON.stringify({ check: inGuilds.map(e => e.id) }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+     })).json()
   } catch (e) {
-     return res.status(500).send({error: "Bot not started."})
+     return res.status(500).send({error: "Bot API is offline."})
   }
   await conn.close()
 

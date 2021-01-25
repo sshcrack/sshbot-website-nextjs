@@ -31,6 +31,7 @@
     "dotenv-webpack": "^6.0.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "emittery": "^0.8.1",
+    "emoji-mart": "^3.0.0",
     "glob": "^7.1.6",
     "hat": "0.0.3",
     "helmet": "^4.4.1",
@@ -67,6 +68,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@types/emoji-mart": "^3.0.4",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

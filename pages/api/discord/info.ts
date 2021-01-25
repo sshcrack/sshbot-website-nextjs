@@ -35,7 +35,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     else return res.status(500).send({ error: "Internal Server Error" });
 
   const mode = (req.query.mode as string) || "basic"
-  const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+  let resultBot: Response
+  try {
+    resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+  } catch (e) {
+    return res.status(500).send({error: "Bot API is offline."})
+  }
   const guild = await resultBot.json()
 
   res.send(guild)

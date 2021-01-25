@@ -2,6 +2,7 @@ import alertsJSON from "assets/dashboard/alerts.json";
 import basicJSON from "assets/dashboard/basic.json";
 import miscJSON from "assets/dashboard/miscellaneous.json";
 import moderationJSON from "assets/dashboard/moderation.json";
+import 'emoji-mart/css/emoji-mart.css';
 import { useRouter } from 'next/router';
 import objectPath from "object-path";
 import { Dispatch, useEffect, useState } from 'react';
@@ -50,6 +51,9 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
         res.json().then(t => {
           setUserData(Object.assign({}, t));
           setFetched(Object.assign({}, t));
+        }).catch(() => {
+          Swal.fire("Internal Server Error", 'An internal server error occurred. If this problem persists, please contact the developers!', 'error')
+            .then(() => { if (location.pathname) location.pathname = "/dashboard" })
         });
       })
     }
@@ -115,14 +119,11 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
       const saveID = item.saveID;
       const label = item.label;
 
-      console.log("\n")
-      console.log("text", text)
-      console.log("t", textToggle[saveID])
-      console.log("\n")
       if (isNull(textToggle[saveID])) {
         textToggle[saveID] = {
           enabled: isNull(text) ? false : true,
-          value: isNull(text) ? "" : text
+          value: isNull(text) ? "" : text,
+          changed: false
         }
         setTextToggle(textToggle);
         setUpdate(!update);
@@ -139,11 +140,16 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
         })
       }
       const generatedText = generateTextToggle(text, item.placeholder, textToggle, d => {
+        const textInfo = d[saveID];
+        textInfo.changed = text !== textInfo.value;
+        console.log("Enabled", textInfo.enabled, "Val", textInfo.value)
+        if (textInfo.enabled) {
+          userData[saveID] = textInfo.value;
+        }
+        else {
+          userData[saveID] = undefined;
+        }
         setTextToggle(d);
-        if (d[saveID].enabled)
-          userData[saveID] = d[saveID].value;
-        else
-          userData[saveID] = "";
         setUserData(userData);
         setUpdate(!update)
       }, saveID);
@@ -163,7 +169,6 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
     if (anyItem.type === "select") {
       const item: SelectStruct = (anyItem as any);
       const defaultValue = processString(item.default, userData, guild);
-      console.log("DefaultValue", defaultValue);
       const saveID = item.saveID;
       const label = item.label;
       const itemLabels: string[] = processString(item.itemLabel, userData, guild) ?? [];
@@ -215,6 +220,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   });
 
 
+  //Components.push(<Picker set={"twitter"} title='Pick your emoji…' onSelect={() => { }} theme={"dark"}/>)
   const filtered = Object.keys(difference).filter(key => !isNull(difference[key]))
   return <>
     {Components}
@@ -224,9 +230,14 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
 
 function saveData(guild: string, userData: any, setLoading: Dispatch<boolean>, setSaving: Dispatch<boolean>) {
   setSaving(true)
-  fetch(`/api/discord/save?id=${guild}`, { method: "POST", body: JSON.stringify(userData), headers: { "Content-Type": "application/json" } }).then(() => {
-    setSaving(false)
-    setLoading(false)
+  fetch(`/api/discord/save?id=${guild}`, { method: "POST", body: JSON.stringify(userData), headers: { "Content-Type": "application/json" } }).then(resp => {
+    if (resp.status !== 200) {
+      Swal.fire('Error', "Your Settings did not get saved because of an internal error", "error").then(() => {
+        if (typeof location !== "undefined") location.reload()
+      });
+      setSaving(false)
+      setLoading(false)
+    }
   })
 }
 
@@ -370,7 +381,8 @@ interface SelectInterface {
 interface TextToggleInt {
   [key: string]: {
     enabled: boolean,
-    value: string
+    value: string,
+    changed: boolean
   }
 }
 

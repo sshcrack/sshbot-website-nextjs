@@ -35,13 +35,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (res.writableEnded) return;
     else return res.status(500).send({ error: "Internal Server Error" });
 
-  const resultBot = await fetch(`${process.env.BOT_URI}/save?guild=${id}&member=${dbAcc.provider_account_id}`, {
-    method: "POST",
-    body: JSON.stringify(req.body),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
+  let resultBot: Response
+  try {
+    resultBot = await fetch(`${process.env.BOT_URI}/save?guild=${id}&member=${dbAcc.provider_account_id}`, {
+      method: "POST",
+      body: JSON.stringify(req.body),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  } catch (e) {
+    return res.status(500).send({error: "Bot API is offline."})
+  }
+
   const guild = await resultBot.json()
 
   res.send(guild)
