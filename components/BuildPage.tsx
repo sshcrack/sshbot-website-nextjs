@@ -25,7 +25,6 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [userData, setUserData] = useState<any>({});
   const [fetched, setFetched] = useState<any>({});
   const [textToggle, setTextToggle] = useState<TextToggleInt>({});
-  const [animData, setAnimData] = useState<AnimDataInt>({});
   const router = useRouter();
 
   let difference = diff(userData, fetched);
@@ -443,10 +442,6 @@ const disabledObj = {
 const enabledObj = {
   x: "0%",
   grow: 1.9
-}
-
-interface AnimDataInt {
-  [key: string]: typeof disabledObj
 }
 
 
