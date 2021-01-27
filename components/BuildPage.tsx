@@ -15,7 +15,9 @@ import { HelpSVG } from 'utils/tsxUtils';
 import vm from "vm";
 import styles from "../styles/mode.module.scss";
 import { SavePopup } from './SavePopup';
+import anime from "animejs"
 import { TharButton } from './TharButton';
+import { CSSProperties } from 'styled-components';
 
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
@@ -24,6 +26,7 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [userData, setUserData] = useState<any>({});
   const [fetched, setFetched] = useState<any>({});
   const [textToggle, setTextToggle] = useState<TextToggleInt>({});
+  const [animData, setAnimData] = useState<AnimDataInt>({});
   const router = useRouter();
 
   let difference = diff(userData, fetched);
@@ -142,7 +145,6 @@ const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
       const generatedText = generateTextToggle(text, item.placeholder, textToggle, d => {
         const textInfo = d[saveID];
         textInfo.changed = text !== textInfo.value;
-        console.log("Enabled", textInfo.enabled, "Val", textInfo.value)
         if (textInfo.enabled) {
           userData[saveID] = textInfo.value;
         }
@@ -309,28 +311,42 @@ const generateSwitch = (defaultValue: boolean, userData: any, setUserData: Dispa
   <Switch key={`${saveID}-Switch`} onChange={(current) => { userData[saveID] = current; setUserData(userData) }} checked={defaultValue} />
 )
 
-const generateTextToggle = (defaultValue: string, placeholder: string, textToggle: TextToggleInt, setTextToggle: Dispatch<TextToggleInt>, saveID: string) => (
-  <>
-    <Switch key={`${saveID}-Switch`} onChange={v => { textToggle[saveID].enabled = v; setTextToggle(textToggle); }} checked={textToggle[saveID].enabled}></Switch>
-    <div className={styles.inputDiv}>
+const generateTextToggle = (defaultValue: string, placeholder: string, textToggle: TextToggleInt, setTextToggle: Dispatch<TextToggleInt>, saveID: string) => {
+  const key = `KEY-${saveID}-KEY`;
+  const enabled = textToggle[saveID].enabled;
+
+  const callback = (obj: AnimJSInterface) => {
+    const data =  obj;
+    const animStyle: string = `transform: translateX(${data.x}); flex-grow: ${data.grow};`
+
+    document.querySelector(`div.${key}`)?.setAttribute("style", animStyle);
+  }
+
+
+  const setChange = (v: boolean) => {
+    textToggle[saveID].enabled = v;
+    v ? handleEnable(callback) : handleDisable(callback);
+    setTextToggle(textToggle);
+  }
+
+
+
+  return <>
+    <Switch key={`${saveID}-Switch`} onChange={v => setChange(v)} checked={enabled}></Switch>
+    <div className={`${styles.inputDiv} ${key} ${styles.inputAnimated} ${textToggle[saveID].enabled ? styles.activeInput : ""}`}>
       <input
         key={`${saveID}-Input`}
         placeholder={placeholder}
         value={textToggle[saveID].value ?? defaultValue}
         onChange={s => { textToggle[saveID].value = s.target.value; setTextToggle(textToggle) }}
+        onFocus={focused => focused?.target?.parentElement?.classList?.toggle(styles.outlined)}
+        onBlur={focused => focused?.target?.parentElement?.classList?.toggle(styles.outlined)}
 
         type={"text"}
-        className={`${styles.inputAnimated} ${textToggle[saveID].enabled ? styles.activeInput : ""}`}
       />
     </div>
   </>
-)
-
-
-
-
-
-
+}
 
 const generateSelect = (options: SelectInterface[], defaultValue: SelectInterface, setChange: (newValue: ValueType<SelectInterface, false>) => void) => {
   return <Select options={options} styles={customStyles} isMulti={false} theme={styleFn} defaultValue={defaultValue} onChange={newValue => {
@@ -387,5 +403,52 @@ interface TextToggleInt {
     changed: boolean
   }
 }
+
+function handleEnable(callback: (obj: AnimJSInterface) => void) {
+  let obj = Object.assign({}, disabledObj)
+
+  anime({
+    targets: obj,
+    autoplay: true,
+    easing: "easeOutElastic(1, 1)",
+    duration:  250,
+    update: () => callback(obj),
+    ...enabledObj
+  })
+};
+
+function handleDisable(callback: (obj: AnimJSInterface) => void) {
+  let obj = Object.assign({}, enabledObj)
+
+  anime({
+    targets: obj,
+    autoplay: true,
+    duration: 250,
+    easing: "easeInElastic(1, 1)",
+    update: () => callback(obj),
+    ...disabledObj
+  })
+}
+
+interface AnimJSInterface {
+  x: string,
+  grow: number
+}
+
+const disabledObj = {
+  x: "100%",
+  grow: 0.5
+}
+
+
+const enabledObj = {
+  x: "0%",
+  grow: 1.9
+}
+
+interface AnimDataInt {
+  [key: string]: typeof disabledObj
+}
+
 
 export default BuildPage;

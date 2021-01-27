@@ -6,7 +6,7 @@ const BotIcon =({className}: Props) =>  (
   <Link href="/" >
     <a className={isNull(className) ? styles.linkBotLogo : className}>
       <div className={styles.botLogo}>
-        <img src="/imgs/botIcon.png"></img>
+        <img src="/imgs/botIcon.png" alt={"Bot-Icon"}></img>
         <h1>sshbot</h1>
       </div>
     </a>
