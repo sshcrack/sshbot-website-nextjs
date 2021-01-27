@@ -1,3 +1,4 @@
+import anime from "animejs";
 import alertsJSON from "assets/dashboard/alerts.json";
 import basicJSON from "assets/dashboard/basic.json";
 import miscJSON from "assets/dashboard/miscellaneous.json";
@@ -15,9 +16,7 @@ import { HelpSVG } from 'utils/tsxUtils';
 import vm from "vm";
 import styles from "../styles/mode.module.scss";
 import { SavePopup } from './SavePopup';
-import anime from "animejs"
 import { TharButton } from './TharButton';
-import { CSSProperties } from 'styled-components';
 
 const BuildPage = ({ mode, guild }: { mode: string, guild: string }) => {
   const [update, setUpdate] = useState<any>(undefined)
