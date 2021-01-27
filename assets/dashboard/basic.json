@@ -17,8 +17,8 @@
     },
     {
       "type": "select",
-      "itemValues": "eval$data?.channels?.map(v => v.id)",
-      "itemLabel": "eval$data?.channels?.map(v => v.name)",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.name)",
       "default": "path$welcomeChannel",
       "saveID": "welcomeChannel",
       "label": "Welcome Channel",
@@ -54,8 +54,8 @@
     },
     {
       "type": "select",
-      "itemValues": "eval$data?.channels?.map(v => v.id)",
-      "itemLabel": "eval$data?.channels?.map(v => v.name)",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.name)",
       "default": "path$levelUpChannel",
       "saveID": "levelUpChannel",
       "label": "Level Up Channel",
@@ -66,8 +66,8 @@
     },
     {
       "type": "select",
-      "itemValues": "eval$data?.channels?.map(v => v.id)",
-      "itemLabel": "eval$data?.channels?.map(v => v.name)",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"category\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"category\")?.map(v => v.name)",
       "default": "path$privateChannel",
       "saveID": "privateChannel",
       "label": "Private Channels",

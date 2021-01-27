@@ -10,16 +10,26 @@
     > * {
         flex: 1;
     }
+}
+
+.inputDiv {
+    background: var(--darkerBackground);
+    border-color: var(--borderColor);
+    border-radius: 4px;
+    height: 2.25em;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 1em;
+    flex: 3;
 
     input {
-        background: var(--darkerBackground);
-        border-color: var(--borderColor);
-        border-radius: 4px;
-        height: 2.25em;
-        border-style: solid;
-        border-width: 1px;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        margin: 0;
         color: var(--primary-font-color);
-        padding-left: 1em;
+        background: transparent;
     }
 }
 

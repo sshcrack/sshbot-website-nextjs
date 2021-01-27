@@ -312,15 +312,17 @@ const generateSwitch = (defaultValue: boolean, userData: any, setUserData: Dispa
 const generateTextToggle = (defaultValue: string, placeholder: string, textToggle: TextToggleInt, setTextToggle: Dispatch<TextToggleInt>, saveID: string) => (
   <>
     <Switch key={`${saveID}-Switch`} onChange={v => { textToggle[saveID].enabled = v; setTextToggle(textToggle); }} checked={textToggle[saveID].enabled}></Switch>
-    <input
-      key={`${saveID}-Input`}
-      placeholder={placeholder}
-      value={textToggle[saveID].value ?? defaultValue}
-      onChange={s => { textToggle[saveID].value = s.target.value; setTextToggle(textToggle) }}
+    <div className={styles.inputDiv}>
+      <input
+        key={`${saveID}-Input`}
+        placeholder={placeholder}
+        value={textToggle[saveID].value ?? defaultValue}
+        onChange={s => { textToggle[saveID].value = s.target.value; setTextToggle(textToggle) }}
 
-      type={"text"}
-      className={`${styles.inputAnimated} ${textToggle[saveID].enabled ? styles.activeInput : ""}`}
-    />
+        type={"text"}
+        className={`${styles.inputAnimated} ${textToggle[saveID].enabled ? styles.activeInput : ""}`}
+      />
+    </div>
   </>
 )
 
