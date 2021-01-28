@@ -35,9 +35,9 @@ const Layout = ({ children, title = 'Title not given.', nav: customNav, style = 
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      <meta property="og:title" content="sshbot" />
-      <meta property="og:url" content="https://sshbot.ddnss.de" />
-      <meta property="og:image" content="https://sshbot.ddnss.de/imgs/og_image.png" />
+      <meta property="og:title" content="ecomody" />
+      <meta property="og:url" content="https://ecomody.ddnss.de" />
+      <meta property="og:image" content="https://ecomody.ddnss.de/imgs/og_image.png" />
     </Head>
 
     <div id={"content-wrapper"}>
@@ -48,7 +48,7 @@ const Layout = ({ children, title = 'Title not given.', nav: customNav, style = 
       </div>
 
       <footer>
-        <span>© 2021 sshbot</span>
+        <span>© 2021 ecomody</span>
       </footer>
     </div>
   </>

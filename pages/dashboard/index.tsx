@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   if (typeof window === "undefined") return null;
   if (!response)
-    return <Layout title="Overview | sshbot" key="Waiting">
+    return <Layout title="Overview | ecomody" key="Waiting">
       <h1>Loading</h1>
       <Loader type="Bars" color="#00BFFF" height={80} width={80} />
     </Layout>
@@ -46,7 +46,7 @@ const Dashboard = () => {
   if (response.error || response.message) {
     console.log("Error", response.error);
     if (typeof response.error === "object") {
-      return <Layout title="Overview | sshbot" key="Error">
+      return <Layout title="Overview | ecomody" key="Error">
         <h1>ERROR</h1>
         <p>
           {(response.error as any).message}
@@ -55,7 +55,7 @@ const Dashboard = () => {
       </Layout>
     }
     if (response.error?.includes("unexpected character")) {
-      return <Layout title="Overview | sshbot" key="Error">
+      return <Layout title="Overview | ecomody" key="Error">
         <h1>ERROR</h1>
         <span>
           500 INTERNAL SERVER ERROR
@@ -65,7 +65,7 @@ const Dashboard = () => {
   }
 
   if (response.error || response.status !== HTTPStatusCodes.OK) {
-    return <Layout title="Overview | sshbot" key="Error">
+    return <Layout title="Overview | ecomody" key="Error">
       <h1>ERROR</h1>
       <p>
         {JSON.stringify(response.error)}
@@ -79,7 +79,7 @@ const Dashboard = () => {
   }
 
   if (isNull(response.permLevels)) {
-    return <Layout title="Overview | sshbot" key="PermLevels">
+    return <Layout title="Overview | ecomody" key="PermLevels">
       <h1>permLevels null</h1>
       <span>{response.permLevels}</span>
     </Layout>
@@ -111,7 +111,7 @@ const Dashboard = () => {
 
 
 
-  return <Layout title="Overview | sshbot" key="Overview">
+  return <Layout title="Overview | ecomody" key="Overview">
     <h1>Overview</h1>
     <GuildsList guilds={filtered} />
   </Layout>

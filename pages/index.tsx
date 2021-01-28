@@ -37,7 +37,7 @@ const IndexPage = () => {
     </button>
 
   return (
-    <Layout title="Home | sshbot">
+    <Layout title="Home | ecomody">
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <h1>A bot for&nbsp;</h1>

@@ -27,7 +27,7 @@ const Guild = () => {
   }
 
   return <>
-    <Layout title="Settings | sshbot" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
+    <Layout title="Settings | ecomody" nav={<DashNav mode={mode as Mode} baseUrl={baseUrl}/>} style={{justifyContent: "start"}}>
       {<BuildPage mode={mode as string} guild={guild as string} />}
     </Layout>
   </>
