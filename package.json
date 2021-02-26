@@ -43,7 +43,7 @@
     "replace": "^1.2.0",
     "sass": "^1.27.1",
     "socket.io": "^3.0.3",
-    "socket.io-client": "^3.0.3",
+    "socket.io-client": "^3.1.2",
     "styled-components": "^5.2.1",
     "superagent": "^6.1.0",
     "typeorm": "^0.2.29",
