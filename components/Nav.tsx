@@ -87,8 +87,10 @@ class SignOutMenu extends Component<signOutProps> {
   }
 
   render() {
+    const imageSrc = this.session.user.image;
+
     return <div className={styles.profileDropdown} onClick={() => this.handleClick()}>
-      <img src={this.session.user.image} alt={"User-Avatar"} />
+      <img style={{borderRadius: "100%"}} src={imageSrc.endsWith("null.png") ? "https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png" : imageSrc} alt={"User-Avatar"} />
       <span>{this.session.user.name}</span>
       <Caret className={styles.caret} />
       <DropdownMenu ref={this.menu}>

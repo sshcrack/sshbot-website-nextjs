@@ -56,7 +56,7 @@ body {
   --moderationSecondary: #625120;
   --dashboardPrimary: #007ef5;
   --dashboardSecondary: #1C4F82;
-  --sshbotFont: #B51E00;
+  --ecomodyFont: #B51E00;
 }
 
 .hidden {
@@ -103,11 +103,8 @@ footer {
 .center {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.center > * {
-  margin: auto;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .discordGradient_svg__discordText {

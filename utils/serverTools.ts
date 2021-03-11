@@ -1,7 +1,7 @@
 import accounts from 'database/constructs/accounts';
 import sessions from 'database/constructs/sessions';
 import { AccountSQL } from 'database/entities/Account';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import fetch from "superagent"
 import { Connection } from 'typeorm';
 import { DiscordRefresh, isNull, RejectType } from './tools';
@@ -16,7 +16,7 @@ export function checkToken(user: AccountSQL, conn: Connection): Promise<AccountS
     const Accounts = new accounts(conn, { where: { user_id: user.user_id } });
 
     const now = moment()
-    if (expiresAt.isBefore(now)) return resolve(user)
+    if (expiresAt.isSameOrAfter(now)) return resolve(user)
 
     const res = (await fetch.post(`https://discord.com/api/v8/oauth2/token`)
       .field('client_id', process.env.CLIENT_ID as string)
@@ -29,7 +29,6 @@ export function checkToken(user: AccountSQL, conn: Connection): Promise<AccountS
         reject(e)
       })) || undefined;
 
-
     if (res === undefined ) return;
     if (res.status !== 200) return reject(new Error(res.text))
     const json: DiscordRefresh = JSON.parse(res.text)
@@ -39,8 +38,8 @@ export function checkToken(user: AccountSQL, conn: Connection): Promise<AccountS
 
     let sql: AccountSQL = {
       access_token: json.access_token,
-      access_token_expires: dateToTimezone(newExpires.toDate()),
-      updated_at: dateToTimezone(now.toDate()),
+      access_token_expires: dateToTimezone(newExpires),
+      updated_at: dateToTimezone(now),
       compound_id: user.compound_id,
       created_at: user.created_at,
       id: user.id,
@@ -51,14 +50,15 @@ export function checkToken(user: AccountSQL, conn: Connection): Promise<AccountS
       user_id: user.id
     }
 
-    await Accounts.set(sql);
-
+    await Accounts.set(sql)
     resolve(sql)
   });
 }
 
-export function dateToTimezone(date: Date) {
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getUTCDate()} ${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}+${formatNumber(Math.floor(date.getTimezoneOffset() / -60), 2)}`
+
+
+export function dateToTimezone(m: Moment) {
+  return `${m.format("YYYY-MM-DD HH:mm:ss")}+${formatNumber(Math.floor(m.toDate().getTimezoneOffset() / -60), 2)}`
 }
 
 export function formatNumber(numb: number, decimals: number) {

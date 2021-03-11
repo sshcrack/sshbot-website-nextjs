@@ -7,9 +7,16 @@ import { isNull, RejectType } from 'utils/tools';
 import fetch from "node-fetch"
 import hat from "hat"
 import { checkToken } from 'utils/serverTools';
+import rateLimit from 'utils/rateLimit';
+import dotenv from "dotenv"
+dotenv.config()
 
-
+const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  const rateLimited = await limiter.check(res, 10, "CACHE_TOKEN")
+  if(rateLimited) return res.send(rateLimited);
+
   const conn = await initializeDatabase(hat());
 
   const session = await getSession({ req }) as Session;
@@ -39,9 +46,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const inGuilds = discordObj as DiscordGuilds[];
 
-  const toFetch = `${process.env.BOT_URI}/permLevels?${inGuilds.map(value => `check[]=${value.id}`).join("&")}&member=${dbAcc?.provider_account_id}`
-
-  const permLevels = await (await fetch(toFetch)).json()
+  const toFetch = `${process.env.BOT_URI}/permLevels?member=${dbAcc?.provider_account_id}`
+  let permLevels;
+  try {
+    permLevels = await (await fetch(toFetch, {
+      method: "POST",
+      body: JSON.stringify({ check: inGuilds.map(e => e.id) }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+     })).json()
+  } catch (e) {
+     return res.status(500).send({error: "Bot API is offline."})
+  }
   await conn.close()
 
   res.send({

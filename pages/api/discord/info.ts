@@ -1,3 +1,4 @@
+
 import accounts from 'database/constructs/accounts';
 import sessions from 'database/constructs/sessions';
 import { SessionSQL } from 'database/entities/Session';
@@ -7,9 +8,15 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 import { checkToken } from 'utils/serverTools';
 import { isNull, RejectType } from 'utils/tools';
+import rateLimit from 'utils/rateLimit';
+import dotenv from "dotenv"
+dotenv.config()
 
-
+const limiter = rateLimit()
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  const rateLimited = await limiter.check(res, 10, "CACHE_TOKEN")
+  if(rateLimited) return res.send(rateLimited);
   const conn = await initializeDatabase(hat());
 
   const id = req.query.id as string
@@ -28,8 +35,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     else return res.status(500).send({ error: "Internal Server Error" });
 
   const mode = (req.query.mode as string) || "basic"
-
-  const resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+  let resultBot: Response
+  try {
+    resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+  } catch (e) {
+    return res.status(500).send({error: "Bot API is offline."})
+  }
   const guild = await resultBot.json()
 
   res.send(guild)

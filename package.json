@@ -2,7 +2,7 @@
   "name": "sshbot-nextjs",
   "version": "1.0.0",
   "scripts": {
-    "cleanup": "node clearTypeorm.js",
+    "cleanup": "node changeModules.js",
     "dev": "npm run cleanup && next dev",
     "build": "npm run cleanup && next build",
     "start": "npm run cleanup &&next start",

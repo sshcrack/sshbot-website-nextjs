@@ -12,6 +12,7 @@ const GuildsList = ({ guilds }: Props) => {
     {guilds.map((item, index) => {
       return <GuildItem data={item} key={index} />
     })}
+    {guilds.length === 0 ? <span className={styles.noServers}>You are not an admin or the server owner of any server.</span> : <></>}
   </div>
 }
 
