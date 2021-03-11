@@ -27,7 +27,7 @@
     "hat": "0.0.3",
     "helmet": "^4.1.1",
     "moment": "^2.29.1",
-    "next": "^10.0.2",
+    "next": "^10.0.8",
     "next-auth": "github:sshcrack/next-auth",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.9.1",
