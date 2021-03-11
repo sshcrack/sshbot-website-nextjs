@@ -31,14 +31,30 @@ const handleLoad = () => {
 }
 
 const GuildItem = ({ data, className }: ItemProps) => {
-  const button = data.botJoined ?
-    <Link href={`/dashboard/${data.id}`}>
+  const buttons: JSX.Element[] = [];
+  if (data.botJoined) {
+    if (data.permLevel >= PermLevels.Administrator) {
+      buttons.push(
+        <Link href={`/dashboard/${data.id}`}>
+        <a>
+          <TharButton className={styles.toDashboard}>Dashboard</TharButton>
+        </a>
+      </Link>
+      )
+    }
+
+    buttons.push(
+      <Link href={`/dashboard/${data.id}`}>
       <a>
-        <TharButton className={styles.toDashboard}>Dashboard</TharButton>
+        <TharButton className={styles.toMusic}>Music</TharButton>
       </a>
     </Link>
-    :
-    <TharButton className={styles.addBot} onClick={() => openJoinWindow(data.id)}>Add</TharButton>
+    )
+  } else
+    if(data.permLevel >= PermLevels.Administrator)
+      buttons.push(
+        <TharButton className={styles.addBot} onClick={() => openJoinWindow(data.id)}>Add</TharButton>
+      )
 
   return <div className={isNull(className) ? styles.item : `${data} ${className}`}>
     <div className={styles.infoBox}>
@@ -46,7 +62,7 @@ const GuildItem = ({ data, className }: ItemProps) => {
       <span>{shorten(data.name, 29)}</span>
     </div>
     <div className={styles.button}>
-      {button}
+      {buttons}
     </div>
   </div>
 

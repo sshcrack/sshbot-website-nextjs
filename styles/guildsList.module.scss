@@ -7,6 +7,14 @@
     border-radius: 5%;
 }
 
+.toMusic {
+    padding: 0.5em;
+    width: 6em;
+    height: 2em;
+    --color: #fff;
+    --anim: var(--musicFont);
+}
+
 .addBot {
     --color: #fff;
     --anim:#1ea800;

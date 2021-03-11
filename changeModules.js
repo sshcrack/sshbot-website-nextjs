@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 const replace = require('replace');
 const fs = require('fs');
 const glob = require('glob');

@@ -90,7 +90,7 @@ const Dashboard = () => {
     const permLevel = response.permLevels[guild.id]
 
     if (!isNull(permLevel))
-      if (permLevel >= PermLevels.Administrator) {
+      if (permLevel >= PermLevels.User) {
         const filteredGuilds = guild as FilteredGuilds
         filteredGuilds.permLevel = permLevel
         filteredGuilds.botJoined = true
@@ -100,7 +100,7 @@ const Dashboard = () => {
 
     if (isAdmin(parseInt(guild.permissions))) {
       const filteredGuilds = guild as FilteredGuilds;
-      filteredGuilds.permLevel = permLevel
+      filteredGuilds.permLevel = permLevel ?? PermLevels.Administrator
       filteredGuilds.botJoined = false
 
       filtered.push(filteredGuilds)
