@@ -1,0 +1,80 @@
+{
+  "fetch": "eval$`/api/discord/info?id=${guild}`",
+  "items": [
+    {
+      "type": "title",
+      "text": "Welcome-Settings"
+    },
+    {
+      "type": "switch",
+      "default": "path$welcomeImage",
+      "saveID": "welcomeImage",
+      "label": "Welcome Image",
+      "help": {
+        "image": "https://i.imgur.com/RXQzsTh.png",
+        "text": "Weather the bot should send an welcome image"
+      }
+    },
+    {
+      "type": "select",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.name)",
+      "default": "path$welcomeChannel",
+      "saveID": "welcomeChannel",
+      "label": "Welcome Channel",
+      "help": {
+        "html": "<p>Message, which should be send, when users leave.</p><p>Variables are {{user}}, {{guildname}} and {{membercount}}</p>"
+      }
+    },
+    {
+      "type": "text_toggle",
+      "default": "path$joinMSG",
+      "saveID": "joinMSG",
+      "label": "Join Message",
+      "placeholder": "Your Join Message",
+      "help": {
+        "html": "<p>Message, which should be send, when users join.</p><p>Variables are {{user}}, {{guildname}} and {{membercount}}</p>"
+      }
+    },
+    {
+      "type": "text_toggle",
+      "default": "path$leaveMSG",
+      "saveID": "leaveMSG",
+      "label": "Leave Message",
+      "placeholder": "Your Leave Message",
+      "help": {
+        "html": "<p>Message, which should be send, when users leave.</p><p>Variables are {{user}}, {{guildname}} and {{membercount}}</p>"
+      }
+    },
+
+
+    {
+      "type": "title",
+      "text": "Channels"
+    },
+    {
+      "type": "select",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"text\")?.map(v => v.name)",
+      "default": "path$levelUpChannel",
+      "saveID": "levelUpChannel",
+      "label": "Level Up Channel",
+      "help": {
+        "image": "https://i.imgur.com/PqJxQZw.png",
+        "text": "Set the Channel for Level-Up Messages"
+      }
+    },
+    {
+      "type": "select",
+      "itemValues": "eval$data?.channels?.filter(v => v?.type === \"category\")?.map(v => v.id)",
+      "itemLabel": "eval$data?.channels?.filter(v => v?.type === \"category\")?.map(v => v.name)",
+      "default": "path$privateChannel",
+      "saveID": "privateChannel",
+      "label": "Private Channels",
+      "help": {
+        "image": "https://i.imgur.com/NFB6VQs.png",
+        "text": "Set channel for private Channels"
+      }
+    }
+  ]
+}

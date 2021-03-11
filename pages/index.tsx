@@ -7,6 +7,7 @@ import styles from "../styles/index.module.scss";
 import io from "socket.io-client"
 import { parseCookies } from 'nookies';
 import { useSession } from 'next-auth/client';
+import Link from 'next/link';
 
 const IndexPage = () => {
   const [session] = useSession();
@@ -22,16 +23,21 @@ const IndexPage = () => {
   });
 
   const button = session ?
-    <button className={`${styles.basicActionButton} ${styles.dashboardButton}`} onClick={() => toDashboard()}>
-        <Dashboard />
-    </button>
+    <Link href="/dashboard">
+      <a>
+        <button className={`${styles.basicActionButton} ${styles.dashboardButton}`}>
+          <Dashboard />
+        </button>
+      </a>
+    </Link>
+
     :
     <button className={`${styles.basicActionButton} ${styles.joinButton}`} onClick={() => openLoginWindow()}>
       <Discord />
     </button>
 
   return (
-    <Layout title="Home | sshbot">
+    <Layout title="Home | ecomody">
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <h1>A bot for&nbsp;</h1>
@@ -82,11 +88,6 @@ export const openLoginWindow = () => {
 
   if (typeof window !== "undefined") newWindow(`${location.protocol}//${location.host}/redirects/login`);
 }
-
-export const toDashboard = () => {
-  if (typeof window !== "undefined") window.location.pathname = "/dashboard"
-}
-
 
 export const openJoinWindow = (guild: string) => {
   fetch('/api/socket').finally(() => {
