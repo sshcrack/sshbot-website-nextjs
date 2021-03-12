@@ -1,0 +1,46 @@
+.track {
+    margin-bottom: 1em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+
+.thumbnail {
+    width: 15em;
+    border-radius: 5%;
+    margin-right: 1em;
+}
+
+.trackName {
+    margin: auto;
+    font-size: 1.25rem;
+}
+
+.trackAuthor {
+}
+
+.avatar {
+    width: 1.5em;
+    margin-right: 0.25em;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    grid-column: 2;
+}
+
+.titleDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.root {
+    display: grid;
+    justify-content: center;
+    margin-left: 10em;
+    flex-direction: column;
+}

@@ -1,5 +1,5 @@
 import { customSession } from 'interfaces/customDiscordProvider';
-import { Session, useSession } from "next-auth/client";
+import { Session, signOut, useSession } from "next-auth/client";
 import { openLoginWindow } from 'pages';
 import { isNull } from 'utils/tools';
 import gavel from "../assets/svg/gavel.svg";
@@ -94,10 +94,10 @@ class SignOutMenu extends Component<signOutProps> {
       <span>{this.session.user.name}</span>
       <Caret className={styles.caret} />
       <DropdownMenu ref={this.menu}>
-      <DropdownItem>
+      <DropdownItem onClick={() => location.pathname  = "/dashboard"}>
           Dashboard
         </DropdownItem>
-        <DropdownItem>
+        <DropdownItem onClick={ () => signOut().then(() => location.reload())}>
           Sign out
         </DropdownItem>
       </DropdownMenu>

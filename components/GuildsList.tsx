@@ -5,7 +5,6 @@ import styles from "../styles/guildsList.module.scss"
 import { TharButton } from './TharButton'
 import anime from "animejs"
 import Link from 'next/link'
-import { openJoinWindow } from 'pages'
 
 const GuildsList = ({ guilds }: Props) => {
   return <div className={styles.root} onLoad={() => handleLoad()}>
@@ -32,29 +31,25 @@ const handleLoad = () => {
 
 const GuildItem = ({ data, className }: ItemProps) => {
   const buttons: JSX.Element[] = [];
-  if (data.botJoined) {
-    if (data.permLevel >= PermLevels.Administrator) {
-      buttons.push(
-        <Link href={`/dashboard/${data.id}`}>
-        <a>
-          <TharButton className={styles.toDashboard}>Dashboard</TharButton>
-        </a>
-      </Link>
-      )
-    }
+  const isAdmin = data.botJoined && data.permLevel >= PermLevels.Administrator;
+  const dashboardText = isAdmin ? "Dashboard" : "Add"
+  const dashboardStyle = isAdmin ? styles.toDashboard : styles.addBot;
 
-    buttons.push(
-      <Link href={`/dashboard/${data.id}`}>
-      <a>
-        <TharButton className={styles.toMusic}>Music</TharButton>
-      </a>
-    </Link>
-    )
-  } else
-    if(data.permLevel >= PermLevels.Administrator)
-      buttons.push(
-        <TharButton className={styles.addBot} onClick={() => openJoinWindow(data.id)}>Add</TharButton>
-      )
+  buttons.push(
+    <Link href={`/dashboard/${data.id}`}>
+    <a>
+        <TharButton className={dashboardStyle}>{dashboardText}</TharButton>
+    </a>
+  </Link>
+  )
+
+  buttons.push(
+    <Link href={`/music/dashboard/${data.id}`}>
+    <a className={!data.botJoined ? styles.invisible : "" }>
+      <TharButton className={`${styles.toMusic}`}>Music</TharButton>
+    </a>
+  </Link>
+  )
 
   return <div className={isNull(className) ? styles.item : `${data} ${className}`}>
     <div className={styles.infoBox}>

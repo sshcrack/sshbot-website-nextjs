@@ -26,8 +26,8 @@ class DropdownMenu extends Component<Props, {enabled: boolean}> {
   }
 }
 
-const DropdownItem = ({ children }: ItemProps) => (
-  <li className={styles.item}>
+const DropdownItem = ({ children, onClick }: ItemProps) => (
+  <li className={styles.item} onClick={() => onClick()}>
     {children}
   </li>
 )
@@ -38,6 +38,7 @@ interface Props {
 
 interface ItemProps {
   children: ReactNode
+  onClick: () => {}
 }
 
 export { DropdownMenu, DropdownItem }
