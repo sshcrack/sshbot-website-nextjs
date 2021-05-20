@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let resultBot: Response
   try {
-    resultBot = await fetch(`${process.env.BOT_URI}/save?guild=${id}&member=${dbAcc.provider_account_id}`, {
+    resultBot = await fetch(`${process.env.BOT_URI}/save?guild=${id}&member=${encodeURI(dbAcc.provider_account_id)}`, {
       method: "POST",
       body: JSON.stringify(req.body),
       headers: {

@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const mode = (req.query.mode as string) || "basic"
   let resultBot: Response
   try {
-    resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${id}&mode=${mode}&member=${dbAcc.provider_account_id}`)
+    resultBot = await fetch(`${process.env.BOT_URI}/guild?guild=${encodeURI(id)}&mode=${encodeURI(mode)}&member=${encodeURI(dbAcc.provider_account_id)}`)
   } catch (e) {
     return res.status(500).send({error: "Bot API is offline."})
   }

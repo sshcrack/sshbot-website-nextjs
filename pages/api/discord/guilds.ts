@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const inGuilds = discordObj as DiscordGuilds[];
 
-  const toFetch = `${process.env.BOT_URI}/permLevels?member=${dbAcc?.provider_account_id}`
+  const toFetch = `${process.env.BOT_URI}/permLevels?member=${encodeURI(dbAcc?.provider_account_id)}`
   let permLevels;
   try {
     permLevels = await (await fetch(toFetch, {
