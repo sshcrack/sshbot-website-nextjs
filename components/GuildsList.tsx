@@ -5,6 +5,7 @@ import styles from "../styles/guildsList.module.scss"
 import { TharButton } from './TharButton'
 import anime from "animejs"
 import Link from 'next/link'
+import { openJoinWindow } from 'pages'
 
 const GuildsList = ({ guilds }: Props) => {
   return <div className={styles.root} onLoad={() => handleLoad()}>
@@ -34,11 +35,12 @@ const GuildItem = ({ data, className }: ItemProps) => {
   const isAdmin = data.botJoined && data.permLevel >= PermLevels.Administrator;
   const dashboardText = isAdmin ? "Dashboard" : "Add"
   const dashboardStyle = isAdmin ? styles.toDashboard : styles.addBot;
+  const link = isAdmin ? `/dashboard/${data.id}` : "/dashboard/#"
 
   buttons.push(
-    <Link href={`/dashboard/${data.id}`}>
+    <Link href={link}>
     <a>
-        <TharButton className={dashboardStyle}>{dashboardText}</TharButton>
+        <TharButton className={dashboardStyle} onClick={() => isAdmin ? {} : openJoinWindow(data.id)}>{dashboardText}</TharButton>
     </a>
   </Link>
   )
